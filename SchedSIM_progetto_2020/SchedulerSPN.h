@@ -14,6 +14,6 @@
 #endif /* UTILS_H_ */
 
 //TODO: Specifiche.
-void emulateSPN(unsigned int length, char* processes[length], unsigned int* arrivals, unsigned int* durations, unsigned int* readyList);
+void emulateSPN(struct processesData processes, unsigned short int debugMode);
 
 #endif /* SCHEDULERSPN_H_ */

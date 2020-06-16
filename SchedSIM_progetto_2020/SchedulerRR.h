@@ -14,6 +14,6 @@
 #endif /* UTILS_H_ */
 
 //TODO: Specifiche.
-void emulateRR(unsigned int length, char* processes[length], unsigned int* arrivals, unsigned int* durations, unsigned int* readyList);
+void emulateRR(struct processesData processes, unsigned short int debugMode);
 
 #endif /* SCHEDULERRR_H_ */

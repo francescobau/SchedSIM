@@ -6,6 +6,9 @@
  */
 
 //TODO: Specifiche.
-void emulateFCFS(unsigned int length, char* processes[length], unsigned int* arrivals, unsigned int* durations, unsigned int* readyList){
-	printf("RECEIVED PARAMETERS:\nprocesses = %p\narrivals = %p\ndurations = %p\nreadyList = %p\n",processes, arrivals, durations, readyList);
+void emulateFCFS(struct processesData processes, unsigned short int debugMode){
+	printf("RECEIVED PARAMETERS:\nprocesses = %p\narrivals = %p\n"
+			"durations = %p\nreadyList = %p\nunreadyList = %p\n",
+			processes, processes->arrivals, processes->durations,
+			processes->readyList, processes->unReadyList);
 }

@@ -14,6 +14,6 @@
 #endif /* UTILS_H_ */
 
 //TODO: Specifiche.
-void emulateSRT(unsigned int length, char* processes[length], unsigned int* arrivals, unsigned int* durations, unsigned int* readyList);
+void emulateSRT(struct processesData processes, unsigned short int debugMode);
 
 #endif /* SCHEDULERSRT_H_ */

@@ -6,6 +6,6 @@
  */
 
 // TODO: Specifiche.
-void emulatePS(unsigned int length, char* processes[length], unsigned int* arrivals, unsigned int* durations, unsigned int* readyList){
+void emulatePS(struct processesData processes, unsigned short int debugMode){
 
 }

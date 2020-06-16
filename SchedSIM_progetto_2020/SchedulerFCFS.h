@@ -14,7 +14,7 @@
 #endif /* UTILS_H_ */
 
 //TODO: Specifiche.
-void emulateFCFS(unsigned int length, char* processes[length], unsigned int* arrivals, unsigned int* durations, unsigned int* readyList);
+void emulateFCFS(struct processesData processes, unsigned short int debugMode);
 
 
 #endif /* SCHEDULERFCFS_H_ */
