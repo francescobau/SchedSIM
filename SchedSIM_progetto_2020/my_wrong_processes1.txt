@@ -1,6 +1,6 @@
-Processo1;0;5
-Processo2;2;4
-Processo3;4;10
+Processo1;0;5;ERR;ERR
+Processo2;2;4;;;;;;
+Processo3;4;10;;;ERR
 Processo4;6;7
 Processo5;8;1
 Processo6;10;3

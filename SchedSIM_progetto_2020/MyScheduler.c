@@ -26,7 +26,16 @@ int main(int argc, char * argv[]){
 	struct processesData structure;
 	int numberOfProcesses = 0;
 	short int mode = DEFAULT_MODE;
+	unsigned short int dynamicAllocations = 0;
 	unsigned short int debugMode = 0;
+
+	/** DEBUG MODE (passato per argomento):
+	 * 0) [DEFAULT] DISATTIVATO (Modalita' essenziale - release)
+	 * != 0) ATTIVATO (Modalita' debug)
+	*/
+	if(argc>1)
+		sscanf(argv[1],"%hu",&debugMode);
+	printf("DEBUG_MODE: %d\n",debugMode);
 
 	// Buffer per la lettura dei dati in input.
 	// Nella calloc si aggiunge un byte per il carattere \0 nel buffer.
@@ -35,28 +44,33 @@ int main(int argc, char * argv[]){
 	// Memorizzo il file nel buffer.
 	fread(buffer,sizeof(char),DEFAULT_SIZE+1,file);
 
+	// Conto il numero di processsi.
 	numberOfProcesses = countProcesses(buffer,debugMode);
+	// Gestione di errori in countProcesses...
 	if(numberOfProcesses == EOF){
 		fprintf(stderr,"Gestione incorretta del buffer in metodo countProcesses.\n"
 				"Il programma verra' chiuso.");
 		mode = EOF;
 		numberOfProcesses = 0;
 	}
+	// Gestione overflow...
 	else if(numberOfProcesses < EOF){
 		fprintf(stderr,"Overflow rilevato (%d). Il programma verra' chiuso.\n",numberOfProcesses);
 		mode = EOF;
 		numberOfProcesses = 0;
 	}
+	// Gestione del caso in cui ci siano 0 processi...
 	else if(!numberOfProcesses){
 		fprintf(stderr,"Nessun processo disponibile. Controllare il file %s .\n",FILE_NAME);
+		mode = EOF;
 	}
-
-	if(preProcess(buffer,debugMode) == EOF){
-		fprintf(stderr,"ERRORE. Troppi token separatori presenti in una sola riga di testo.\n"
+	// Se non ci sono problemi, inizia la fase di preProcess.
+	else if(preProcess(buffer,debugMode) == EOF){
+		fprintf(stderr,"ERRORE. Sono stati rilevati piu' di %1$d token separatori in una sola riga di testo.\n"
 			"Accertarsi che i nomi dei processi non contengano i caratteri \',\' , \';\' , \'.\' o \':\' .\n"
 			"Tali caratteri sono usati come separatori.\n"
-			"I token separatori devono essere al massimo 2 per riga (3 elementi per riga).\n"
-			"Il programma verra' chiuso.");
+			"I token separatori devono essere al massimo %1$d per riga (%2$d elementi per riga).\n"
+			"Il programma verra' chiuso.\n",MAX_TOKENS,MAX_TOKENS+1);
 		mode = EOF;
 	}
 	// Lista dei processi.
@@ -67,10 +81,8 @@ int main(int argc, char * argv[]){
 	unsigned int durations[numberOfProcesses];
 	// Ready List, che conterra' gli indici dei processi.
 	unsigned int readyList[numberOfProcesses];
-	// Lista degli indici che non sono ancora arrivati in Ready List.
+	// Lista degli indici di processi che non sono ancora arrivati in Ready List.
 	unsigned int unReadyList[numberOfProcesses];
-	// All'inizio, nessuno e' in Ready List.
-	generateQueue(numberOfProcesses, unReadyList);
 	// Salvo i puntatori nella struct.
 	structure.length = numberOfProcesses;
 	structure.processes = processes;
@@ -78,22 +90,16 @@ int main(int argc, char * argv[]){
 	structure.durations = durations;
 	structure.readyList = readyList;
 	structure.unReadyList = unReadyList;
-	/** DEBUG MODE (passato per argomento):
-	 * 0) [DEFAULT] DISATTIVATO (Modalita' essenziale - release)
-	 * != 0) ATTIVATO (Modalita' debug)
-	*/
-	if(argc>1)
-		sscanf(argv[1],"%hu",&debugMode);
-	printf("DEBUG_MODE: %d\n",debugMode);
 
-	if(mode>0)
-		importProcesses(buffer, structure, debugMode);
+	// Reimposto la Ready List e la Unready List
+	// (e, quindi, anche le loro lunghezze).
+	restoreQueues(structure, debugMode);
 
-	// Continua ad eseguire, fino a quando non si inserisce un valore invalido o 0.
-	while(mode>0){
+	if(mode != EOF)
+		dynamicAllocations = importProcesses(buffer, structure, debugMode);
+	// Continua ad eseguire, fino a quando viene inserito 0.
+	while(mode>0 && dynamicAllocations==numberOfProcesses){
 		// Selezione della modalita'.
-		// Questo programma continua ad eseguire fino a quando non si inserisce un
-		// valore invalido o 0.
 		mode = selectMode(debugMode);
 		switch(mode){
 		case FCFS_MODE:{
@@ -128,20 +134,22 @@ int main(int argc, char * argv[]){
 			// della modalita' non e' gestito bene, o c'e' stata una violazione del programma.
 			// quindi si assume un valore invalido, segnalando a stderr.
 			// Se mode e' 0, allora questo passaggio viene ignorato.
-			if(mode){
-				fprintf(stderr,"POSSIBILE VIOLAZIONE DEL PROGRAMMA RILEVATA. La modalita' selezionata ( %d ) non e' valida. Chiudo il programma.\n",mode);
-				mode = INVALID_MODE;
-			}
+			if(mode && mode != EOF)
+				mode = DEFAULT_MODE;
 			break;
 		}
 		}
+		restoreQueues(structure, debugMode);
 	}
 	// Libero la memoria allocata.
 	free(buffer);
-	// Libero la memoria allocata nell'array processes.
-	freeArray(structure, debugMode);
 	// Chiudo il file.
 	fclose(file);
+	// Libero la memoria allocata dinamicamente nell'array di processi.
+	freeArray(structure, dynamicAllocations, debugMode);
+
+	printf("Chiusura del programma in corso...\n");
+
 	// Controllo che il file non abbia subito errori.
 	if(mode)
 		return EXIT_FAILURE;

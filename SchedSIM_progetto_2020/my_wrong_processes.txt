@@ -1,4 +1,4 @@
-Processo1;0;5:
+Processo1;0;5
 Processo2;2;4:
 Processo3;4;10:
 Processo4;6;7:

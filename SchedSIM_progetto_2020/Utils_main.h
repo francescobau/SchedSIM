@@ -17,6 +17,12 @@
 
 // Nome del file
 #define FILE_NAME "my_processes.txt"
+//#define FILE_NAME "my_processes1.txt"
+//#define FILE_NAME "my_processes2.txt"
+//#define FILE_NAME "my_processes3.txt"
+//#define FILE_NAME "my_wrong_processes.txt"
+//#define FILE_NAME "my_wrong_processes1.txt"
+//#define FILE_NAME "empty_file.txt"
 
 // Modalita' disponibili nel menu.
 #define FCFS_MODE 1
@@ -32,19 +38,17 @@
 
 // Numero di possibili modalita'.
 #define MODE_LENGTH SRT_MODE
-// Codice per modalita' invalida.
-#define INVALID_MODE EOF
+// Numero massimo di token separatori.
+#define MAX_TOKENS 2
 //TODO: Specifiche
-unsigned short int selectMode(unsigned short int debugMode);
-//TODO: Specifiche
+short int selectMode(unsigned short int debugMode);
+// Funzione che scansiona rapidamente il file, contando quanti processi ci sono.
 int countProcesses(char* buffer, unsigned short int debugMode);
 //TODO: Specifiche
 int preProcess(char* buffer, unsigned int debugMode);
 //TODO: Specifiche
 int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode);
 //TODO: Specifiche
-void freeArray(struct processesData processes, unsigned short int debugMode);
-//TODO: Specifiche.
-void restoreArray();
+void freeArray(struct processesData processes, unsigned short int amount, unsigned short int debugMode);
 
 #endif /* UTILS_MAIN_H_ */

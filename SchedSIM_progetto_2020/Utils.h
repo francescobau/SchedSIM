@@ -20,6 +20,8 @@
 
 struct processesData{
 	unsigned int length;
+	unsigned int lenRL;
+	unsigned int lenURL;
 	char** processes;
 	unsigned int* arrivals;
 	unsigned int* durations;
@@ -27,8 +29,14 @@ struct processesData{
 	unsigned int* unReadyList;
 };
 
+// enum per specificare se si vuole effettuare l'operazione
+// dalla Ready List o dalla UnReady List.
+typedef enum listType {readyList,unReadyList};
+
 //TODO: SPECIFICHE.
-int checkArrivalsAtTime(unsigned int time, struct processesData processes);
+int checkArrivals(unsigned int time, struct processesData processes);
 //TODO: SPECIFICHE.
-void generateQueue(unsigned int length, unsigned int queue[length]);
+void restoreQueues(struct processesData processes, unsigned int debugMode);
+//TODO: SPECIFICHE.
+int removeProcessAt(unsigned int index, struct processesData processes, enum listType lt, unsigned int debugMode);
 #endif /* UTILS_H_ */
