@@ -28,8 +28,8 @@ int main(int argc, char * argv[]){
 	short int mode = DEFAULT_MODE;
 	unsigned short int debugMode = 0;
 
-	// Nelle calloc si aggiunge un byte per il carattere \0 nel buffer.
 	// Buffer per la lettura dei dati in input.
+	// Nella calloc si aggiunge un byte per il carattere \0 nel buffer.
 	char* buffer = (char*) calloc(DEFAULT_SIZE+1,1);
 
 	// Memorizzo il file nel buffer.
@@ -87,7 +87,7 @@ int main(int argc, char * argv[]){
 	printf("DEBUG_MODE: %d\n",debugMode);
 
 	if(mode>0)
-		importProcesses(buffer, numberOfProcesses, processes, arrivals, durations);
+		importProcesses(buffer, structure, debugMode);
 
 	// Continua ad eseguire, fino a quando non si inserisce un valore invalido o 0.
 	while(mode>0){
@@ -100,27 +100,27 @@ int main(int argc, char * argv[]){
 			// FCFS (First Come, First Served)
 			if(debugMode)
 				printf("EXPECTED PARAMETERS:\nprocesses = %p\narrivals = %p\ndurations = %p\nreadyList = %p\n",processes, arrivals, durations, readyList);
-			emulateFCFS(numberOfProcesses, processes, arrivals, durations, readyList);
+			emulateFCFS(structure, debugMode);
 			break;
 		}
 		case RR_MODE:{
 			// RR (Round Robin)
-			emulateRR(numberOfProcesses, processes, arrivals, durations, readyList);
+			emulateRR(structure, debugMode);
 			break;
 		}
 		case PS_MODE:{
 			// PS (Priority Scheduling)
-			emulatePS(numberOfProcesses, processes, arrivals, durations, readyList);
+			emulatePS(structure, debugMode);
 			break;
 		}
 		case SPN_MODE:{
 			// SPN (Shortest Process Next)
-			emulateSPN(numberOfProcesses, processes, arrivals, durations, readyList);
+			emulateSPN(structure, debugMode);
 			break;
 		}
 		case SRT_MODE:{
 			// SRT (Shortest Remaining Time)
-			emulateSRT(numberOfProcesses, processes, arrivals, durations, readyList);
+			emulateSRT(structure, debugMode);
 			break;
 		}
 		default:{
@@ -139,7 +139,7 @@ int main(int argc, char * argv[]){
 	// Libero la memoria allocata.
 	free(buffer);
 	// Libero la memoria allocata nell'array processes.
-	freeArray(numberOfProcesses, processes, debugMode);
+	freeArray(structure, debugMode);
 	// Chiudo il file.
 	fclose(file);
 	// Controllo che il file non abbia subito errori.

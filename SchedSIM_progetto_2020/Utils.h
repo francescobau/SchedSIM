@@ -24,11 +24,11 @@ struct processesData{
 	unsigned int* arrivals;
 	unsigned int* durations;
 	unsigned int* readyList;
-	unsigned int** unReadyList;
+	unsigned int* unReadyList;
 };
 
 //TODO: SPECIFICHE.
-int checkArrivalsAtTime(unsigned int time, unsigned int length, unsigned int arrivals[length], unsigned int remainingIndexes, unsigned int queue[remainingIndexes]);
+int checkArrivalsAtTime(unsigned int time, struct processesData processes);
 //TODO: SPECIFICHE.
 void generateQueue(unsigned int length, unsigned int queue[length]);
 #endif /* UTILS_H_ */

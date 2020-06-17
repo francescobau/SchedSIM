@@ -54,7 +54,7 @@ int countProcesses(char* buffer, unsigned short int debugMode){
 	for(int i=0;*(buffer+i)!='\0' && i<=DEFAULT_SIZE;++i){
 		printf("DEBUG *(buffer+%d) = %c\n",i,*(buffer+i));
 		// I caratteri di newline consecutivi non contano.
-		// Deve essere contato solo 1.
+		// Deve essere contato solo 1 carattere di newline.
 		// Inoltre, i deve essere > 0, o si ha comportamento indefinito.
 		if(*(buffer+i) == '\n' && i && *(buffer+i-1) != '\n')
 			++numberOfProcesses;
@@ -95,20 +95,22 @@ int preProcess(char* buffer, unsigned int debugMode){
  * @param readyList L'array contenente gli indici dei processi nella coda Ready.
  * @return 0 in caso di successo, EOF in caso di errore.
  */
-int importProcesses(char* buffer, unsigned int length, char* processes[length], unsigned int arrivals[length], unsigned int durations[length]){
+int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode){
 	char* next = buffer;
 	int flag = 0;
-	for(int i = 0; i<length && next<buffer+DEFAULT_SIZE;++i){
+	for(int i = 0; i<processes.length && next<buffer+DEFAULT_SIZE;++i){
 		// Importazione dei nomi di processo.
-		processes[i] = (char*) calloc(DEFAULT_SIZE+1,1);
-		flag = sscanf(next,"%s %u %u\n",processes[i],&arrivals[i],&durations[i]);
+		processes.processes[i] = (char*) calloc(DEFAULT_SIZE+1,1);
+		flag = sscanf(next,"%s %u %u\n",(processes.processes[i]),&(processes.arrivals[i]),&(processes.durations[i]));
 		if(flag != 3){
-			fprintf(stderr,"Rilevati %d token. Si aspetta che siano solo 3.\n");
+			fprintf(stderr,"Rilevati %d token. Si aspetta che siano solo 3.\n",flag);
 			return EOF;
 		}
-		printf("DEBUG processes[%d] = %s\n",i,processes[i]);
-		printf("DEBUG arrivals[%d] = %u\n",i,arrivals[i]);
-		printf("DEBUG durations[%d] = %u\n",i,durations[i]);
+		if(debugMode){
+			printf("DEBUG processes[%d] = %s\n",i,processes.processes[i]);
+			printf("DEBUG arrivals[%d] = %u\n",i,processes.arrivals[i]);
+			printf("DEBUG durations[%d] = %u\n",i,processes.durations[i]);
+		}
 		next = strchr(next,'\n');
 		if(next == NULL){
 			fprintf(stderr,"ERRORE IN FASE DI IMPORTAZIONE.\n");
@@ -122,8 +124,10 @@ int importProcesses(char* buffer, unsigned int length, char* processes[length], 
 /**
  * TODO: Specifiche.
  */
-void freeArray(unsigned int length, char* processes[length], unsigned short int debugMode){
-	for(int i=0; i<length; ++i){
-		free(processes[i]);
+void freeArray(struct processesData processes, unsigned short int debugMode){
+	for(int i=0; i<processes.length; ++i){
+		free(processes.processes[i]);
+		if(debugMode)
+			printf("DEBUG MEMORIA LIBERATA: %d\n",i);
 	}
 }

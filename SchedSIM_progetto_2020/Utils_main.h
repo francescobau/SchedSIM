@@ -30,8 +30,9 @@
 // Modalita' di default.
 #define DEFAULT_MODE FCFS_MODE
 
-// Numero di possibili modalita', e il codice per modalita' invalida.
+// Numero di possibili modalita'.
 #define MODE_LENGTH SRT_MODE
+// Codice per modalita' invalida.
 #define INVALID_MODE EOF
 //TODO: Specifiche
 unsigned short int selectMode(unsigned short int debugMode);
@@ -40,8 +41,10 @@ int countProcesses(char* buffer, unsigned short int debugMode);
 //TODO: Specifiche
 int preProcess(char* buffer, unsigned int debugMode);
 //TODO: Specifiche
-int importProcesses(char* buffer, unsigned int length, char* processes[length], unsigned int arrivals[length], unsigned int durations[length]);
+int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode);
 //TODO: Specifiche
-void freeArray(unsigned int length, char* processes[length], unsigned short int debugMode);
+void freeArray(struct processesData processes, unsigned short int debugMode);
+//TODO: Specifiche.
+void restoreArray();
 
 #endif /* UTILS_MAIN_H_ */
