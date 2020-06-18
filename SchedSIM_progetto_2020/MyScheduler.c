@@ -90,6 +90,8 @@ int main(int argc, char * argv[]){
 	unsigned int readyList[numberOfProcesses];
 	// Lista degli indici di processi che non sono ancora arrivati in Ready List.
 	unsigned int unReadyList[numberOfProcesses];
+	// Lista dei tempi rimanenti.
+	unsigned int leftovers[numberOfProcesses];
 	// Salvo i puntatori nella struct.
 	structure.length = numberOfProcesses;
 	structure.processes = processes;
@@ -99,6 +101,7 @@ int main(int argc, char * argv[]){
 	structure.unReadyList = unReadyList;
 	structure.lenRL = &lenRL;
 	structure.lenURL = &lenURL;
+	structure.leftovers = leftovers;
 
 	if(mode != EOF)
 		dynamicAllocations = importProcesses(buffer, structure, debugMode);
@@ -108,7 +111,7 @@ int main(int argc, char * argv[]){
 		mode = selectMode(debugMode);
 		// Reimposto la Ready List e la Unready List
 		// (e, quindi, anche le loro lunghezze).
-		restoreQueues(structure, debugMode);
+		restoreLists(structure, debugMode);
 		switch(mode){
 		case FCFS_MODE:{
 			// FCFS (First Come, First Served)
@@ -122,7 +125,6 @@ int main(int argc, char * argv[]){
 			// RR (Round Robin)
 			printf("Algoritmo scelto: RR\n");
 			emulateRR(structure, debugMode);
-			notAvailable(mode);
 			break;
 		}
 		case PS_MODE:{

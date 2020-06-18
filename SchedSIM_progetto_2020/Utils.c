@@ -23,12 +23,13 @@ unsigned int checkArrivals(unsigned int time, struct processesData processes, un
 	return count;
 }
 //TODO: SPECIFICHE.
-void restoreQueues(struct processesData processes, unsigned short int debugMode){
+void restoreLists(struct processesData processes, unsigned short int debugMode){
 	*(processes.lenRL) = 0;
 	*(processes.lenURL) = processes.length;
 	for(unsigned int i=0;i<processes.length;++i){
 		processes.unReadyList[i] = i;
 		processes.readyList[i] = 0;
+		processes.leftovers[i] = processes.durations[i];
 	}
 }
 
@@ -213,7 +214,8 @@ int printArray(struct processesData processes, enum listType lt, unsigned short 
 		return EOF;
 	}
 	for(unsigned int i=0; i<length; ++i){
-		printf("[%u] -> %s [ID = %u]\n",i,processes.processes[pointer[i]],pointer[i]);
+		printf("[%u] -> %s [ID = %u] [TL = %u]\n",i,processes.processes[pointer[i]],
+				pointer[i],processes.leftovers[pointer[i]]);
 	}
 	if(!length)
 		printf("[Empty]\n");

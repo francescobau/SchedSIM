@@ -32,6 +32,7 @@ struct processesData{
 	unsigned int* durations;
 	unsigned int* readyList;
 	unsigned int* unReadyList;
+	unsigned int* leftovers;
 };
 
 // enum per specificare se si vuole effettuare l'operazione
@@ -41,7 +42,7 @@ enum listType {readyList,unReadyList};
 // Funzione per controllare quali processi entrano in RL ad un certo istante time.
 unsigned int checkArrivals(unsigned int time, struct processesData processes, unsigned short int debugMode);
 // Funzione che ripristina lo stato della RL e della uRL allo stato iniziale.
-void restoreQueues(struct processesData processes, unsigned short int debugMode);
+void restoreLists(struct processesData processes, unsigned short int debugMode);
 // Funzione che inserisce un processo in RL ad un certo indice.
 int addProcessAt(unsigned int processIndex, unsigned int targetIndex, struct processesData processes, unsigned short int debugMode);
 // Funzione che rimuove un processo da RL o da uRL ad un certo indice.

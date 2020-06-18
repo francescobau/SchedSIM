@@ -29,7 +29,7 @@ void emulateFCFS(struct processesData processes, unsigned short int debugMode){
 			if(currentProcessID != processes.length)
 				printf("Esecuzione processo \" %s \" terminata.\n",processes.processes[currentProcessID]);
 			currentProcessID = dequeue(processes, readyList, debugMode);
-			timeRemaining = processes.durations[currentProcessID];
+			timeRemaining = processes.leftovers[currentProcessID];
 			// Se non e' arrivato nessun processo in ReadyList, vuol dire che e' solo cambiato il processo
 			// in esecuzione, quindi e' cambiata la Ready List.
 			if(!arrivalsCount)
@@ -46,7 +46,9 @@ void emulateFCFS(struct processesData processes, unsigned short int debugMode){
 			}
 		}
 		if(timeRemaining)
-			--timeRemaining;
+			--(processes.leftovers[currentProcessID]);
+		// Sincronizzo il tempo rimasto.
+		timeRemaining = processes.leftovers[currentProcessID];
 		// Newline aggiuntivo per risaltare l'output.
 		printf("\n");
 	}
