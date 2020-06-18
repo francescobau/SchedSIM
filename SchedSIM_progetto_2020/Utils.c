@@ -213,7 +213,9 @@ int printArray(struct processesData processes, enum listType lt, unsigned short 
 		return EOF;
 	}
 	for(unsigned int i=0; i<length; ++i){
-		printf("array[%u] = %u\n",i,pointer[i]);
+		printf("[%u] -> %s [ID = %u]\n",i,processes.processes[pointer[i]],pointer[i]);
 	}
+	if(!length)
+		printf("[Empty]\n");
 	return 0;
 }

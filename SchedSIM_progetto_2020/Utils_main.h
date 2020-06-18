@@ -25,8 +25,8 @@
 //#define FILE_NAME "my_wrong_processes2.txt"
 //#define FILE_NAME "my_wrong_processes3.txt"
 //#define FILE_NAME "empty_file.txt"
-//#define FILE_NAME "my_mixed_processes.txt"
-#define FILE_NAME "my_invalid_processes.txt"
+#define FILE_NAME "my_mixed_processes.txt"
+//#define FILE_NAME "my_invalid_processes.txt"
 
 // Modalita' disponibili nel menu.
 #define FCFS_MODE 1
