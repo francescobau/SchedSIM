@@ -1,8 +1,8 @@
 /*
  * SchedulerSRT.c
  *
- *  Created on: 7 giu 2020
- *      Author: francesco
+ *      @author		Francesco Bau' 1136850
+ *      @since		7 giu 2020
  */
 #include "SchedulerSRT.h"
 /**

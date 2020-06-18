@@ -1,8 +1,8 @@
 /*
  * Utils.c
  *
- *  Created on: 16 giu 2020
- *      Author: francesco
+ *      @author		Francesco Bau' 1136850
+ *  	@since		16 giu 2020
  */
 
 #include "Utils.h"
