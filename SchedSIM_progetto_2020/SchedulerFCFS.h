@@ -13,8 +13,7 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-//TODO: Specifiche.
+// Esecuzione dell'algoritmo FCFS.
 void emulateFCFS(struct processesData processes, unsigned short int debugMode);
-
 
 #endif /* SCHEDULERFCFS_H_ */

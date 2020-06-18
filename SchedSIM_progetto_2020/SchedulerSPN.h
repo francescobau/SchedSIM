@@ -13,7 +13,7 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-//TODO: Specifiche.
+// Esecuzione dell'algoritmo SPN.
 void emulateSPN(struct processesData processes, unsigned short int debugMode);
 
 #endif /* SCHEDULERSPN_H_ */

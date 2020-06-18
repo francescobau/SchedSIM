@@ -13,7 +13,7 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-// TODO: Specifiche.
+// Esecuzione dell'algoritmo PS.
 void emulatePS(struct processesData processes, unsigned short int debugMode);
 
 #endif /* SCHEDULERPS_H_ */

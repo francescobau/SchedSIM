@@ -13,7 +13,7 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-//TODO: Specifiche.
+// Esecuzione dell'algoritmo SRT.
 void emulateSRT(struct processesData processes, unsigned short int debugMode);
 
 #endif /* SCHEDULERSRT_H_ */

@@ -45,15 +45,17 @@
 // Numero massimo di token estratti da una riga di testo.
 // Il numero massimo di token separatori e' MAX_TOKENS-1 .
 #define MAX_TOKENS 3
-// Funzione che fa scegliere all'utente la modalita'.
+// Funzione che permette all'utente di scegliere la modalita'.
 short int selectMode(unsigned short int debugMode);
 // Funzione che scansiona rapidamente il file, contando quanti processi ci sono.
-int countProcesses(char* buffer, unsigned short int debugMode);
+int countProcesses(char *buffer, unsigned short int debugMode);
 // Funzione che preprocessa il buffer, sostituendo i token separatori in spazi.
-int preProcess(char* buffer, unsigned short int debugMode);
+int preProcess(char *buffer, unsigned short int debugMode);
 // Funzione che memorizza il contenuto del buffer nei vari array.
-int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode);
+int importProcesses(char *buffer, struct processesData processes,
+		unsigned short int debugMode);
 // Funzione che libera lo spazio allocato dinamicamente per l'array dei nomi di processo.
-void freeArray(struct processesData processes, unsigned short int amount, unsigned short int debugMode);
+void freeArray(struct processesData processes, unsigned short int amount,
+		unsigned short int debugMode);
 
 #endif /* UTILS_MAIN_H_ */

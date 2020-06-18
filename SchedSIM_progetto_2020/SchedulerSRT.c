@@ -5,7 +5,12 @@
  *      Author: francesco
  */
 #include "SchedulerSRT.h"
-//TODO: Specifiche.
-void emulateSRT(struct processesData processes, unsigned short int debugMode){
+/**
+ * Esecuzione dell'algoritmo SRT.
+ *
+ * @param processes 	Le proprieta' dei vari processi.
+ * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
+ */
+void emulateSRT(struct processesData processes, unsigned short int debugMode) {
 
 }

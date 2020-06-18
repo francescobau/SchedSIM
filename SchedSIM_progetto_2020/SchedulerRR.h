@@ -13,7 +13,7 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-//TODO: Specifiche.
+// Esecuzione dell'algoritmo RR.
 void emulateRR(struct processesData processes, unsigned short int debugMode);
 
 #endif /* SCHEDULERRR_H_ */
