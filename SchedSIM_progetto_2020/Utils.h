@@ -34,9 +34,24 @@ struct processesData{
 enum listType {readyList,unReadyList};
 
 // Funzione per controllare quali processi entrano in RL ad un certo istante time.
-int checkArrivals(unsigned int time, struct processesData processes);
-// Funzione che ripristina lo stato della RL e della uRL.
+unsigned int checkArrivals(unsigned int time, struct processesData processes, unsigned int debugMode);
+// Funzione che ripristina lo stato della RL e della uRL allo stato iniziale.
 void restoreQueues(struct processesData processes, unsigned int debugMode);
-// Funzione che rimuove un processo dalla coda RL o uRL.
-int removeProcessAt(unsigned int index, struct processesData processes, enum listType lt, unsigned int debugMode);
+// Funzione che inserisce un processo in RL ad un certo indice.
+int addProcessAt(unsigned int processIndex, unsigned int targetIndex, struct processesData processes, unsigned int debugMode);
+// Funzione che rimuove un processo da RL o da uRL ad un certo indice.
+int removeProcessAt(unsigned int targetIndex, struct processesData processes, enum listType lt, unsigned int debugMode);
+// Funzione che mette un processo in coda a RL.
+int enqueue(unsigned int processIndex, struct processesData processes, unsigned int debugMode);
+// Funzione che rimuove il primo processo in RL o uRL.
+int dequeue(struct processesData processes, enum listType lt, unsigned int debugMode);
+// Funzione che sposta in testa un processo da uRL.
+int putOnHead(unsigned int targetIndex, struct processesData processes, unsigned int debugMode);
+// Funzione che stampa in stderr che l'indice cercato non e' valido.
+void nonValidIndexError(unsigned int targetIndex);
+// Funzione che riordina la unReady list. Viene usato Bubble Sort.
+// TODO: Implementare algoritmo migliore.
+void sortPerArrival(struct processesData processes, unsigned int debugMode);
+// Funzione per stampare il contenuto di RL o di uRL.
+int printArray(struct processesData processes, enum listType lt, unsigned int debugMode);
 #endif /* UTILS_H_ */
