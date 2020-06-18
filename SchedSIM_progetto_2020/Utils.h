@@ -30,13 +30,13 @@ struct processesData{
 };
 
 // enum per specificare se si vuole effettuare l'operazione
-// dalla Ready List o dalla UnReady List.
-typedef enum listType {readyList,unReadyList};
+// dalla Ready List o dalla unReady List.
+enum listType {readyList,unReadyList};
 
-//TODO: SPECIFICHE.
+// Funzione per controllare quali processi entrano in RL ad un certo istante time.
 int checkArrivals(unsigned int time, struct processesData processes);
-//TODO: SPECIFICHE.
+// Funzione che ripristina lo stato della RL e della uRL.
 void restoreQueues(struct processesData processes, unsigned int debugMode);
-//TODO: SPECIFICHE.
+// Funzione che rimuove un processo dalla coda RL o uRL.
 int removeProcessAt(unsigned int index, struct processesData processes, enum listType lt, unsigned int debugMode);
 #endif /* UTILS_H_ */

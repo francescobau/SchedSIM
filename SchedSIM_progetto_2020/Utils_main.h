@@ -16,12 +16,14 @@
 #include "SchedulerSRT.h"
 
 // Nome del file
-#define FILE_NAME "my_processes.txt"
-//#define FILE_NAME "my_processes1.txt"
+//#define FILE_NAME "my_processes.txt"
+#define FILE_NAME "my_processes1.txt"
 //#define FILE_NAME "my_processes2.txt"
 //#define FILE_NAME "my_processes3.txt"
 //#define FILE_NAME "my_wrong_processes.txt"
 //#define FILE_NAME "my_wrong_processes1.txt"
+//#define FILE_NAME "my_wrong_processes2.txt"
+//#define FILE_NAME "my_wrong_processes3.txt"
 //#define FILE_NAME "empty_file.txt"
 
 // Modalita' disponibili nel menu.
@@ -38,17 +40,18 @@
 
 // Numero di possibili modalita'.
 #define MODE_LENGTH SRT_MODE
-// Numero massimo di token separatori.
-#define MAX_TOKENS 2
-//TODO: Specifiche
+// Numero massimo di token estratti da una riga di testo.
+// Il numero massimo di token separatori e' MAX_TOKENS-1 .
+#define MAX_TOKENS 3
+// Funzione che fa scegliere all'utente la modalita'.
 short int selectMode(unsigned short int debugMode);
 // Funzione che scansiona rapidamente il file, contando quanti processi ci sono.
 int countProcesses(char* buffer, unsigned short int debugMode);
-//TODO: Specifiche
+// Funzione che preprocessa il buffer, sostituendo i token separatori in spazi.
 int preProcess(char* buffer, unsigned int debugMode);
-//TODO: Specifiche
+// Funzione che memorizza il contenuto del buffer nei vari array.
 int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode);
-//TODO: Specifiche
+// Funzione che libera lo spazio allocato dinamicamente per l'array dei nomi di processo.
 void freeArray(struct processesData processes, unsigned short int amount, unsigned short int debugMode);
 
 #endif /* UTILS_MAIN_H_ */

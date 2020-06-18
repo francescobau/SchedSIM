@@ -91,7 +91,7 @@ int preProcess(char* buffer, unsigned int debugMode){
 				printf("DEBUG tokenCounter : %u\n",tokenCounter);
 			// Controllo per vedere se i caratteri separatori sono usati
 			// usati in modo appropriato o no.
-			if(tokenCounter > MAX_TOKENS)
+			if(tokenCounter >= MAX_TOKENS)
 				return EOF;
 		}
 	}
@@ -115,9 +115,9 @@ int importProcesses(char* buffer, struct processesData processes, unsigned short
 		// Importazione dei nomi di processo.
 		processes.processes[counter] = (char*) calloc(DEFAULT_SIZE+1,1);
 		nTokens = sscanf(next,"%s %u %u\n",(processes.processes[counter]),&(processes.arrivals[counter]),&(processes.durations[counter]));
-		if(nTokens != 3){
-			fprintf(stderr,"%d token da sscanf. Si aspetta che siano 3.\n",nTokens);
-			return counter;
+		if(nTokens != MAX_TOKENS){
+			fprintf(stderr,"%d token rilevato da sscanf. Si aspetta che siano %d token per ogni riga.\n",nTokens,MAX_TOKENS);
+			return counter+sizeof(char);
 		}
 		if(debugMode){
 			printf("DEBUG processes[%d] = %s\n",counter,processes.processes[counter]);
@@ -127,7 +127,7 @@ int importProcesses(char* buffer, struct processesData processes, unsigned short
 		next = strchr(next,'\n');
 		if(next == NULL){
 			fprintf(stderr,"ERRORE SCONOSCIUTO IN FASE DI IMPORTAZIONE.\n");
-			return counter;
+			return counter+sizeof(char);
 		}
 		++next;
 	}
