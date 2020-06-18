@@ -9,9 +9,9 @@
 
 
 //TODO: SPECIFICHE.
-unsigned int checkArrivals(unsigned int time, struct processesData processes, unsigned int debugMode){
+unsigned int checkArrivals(unsigned int time, struct processesData processes, unsigned short int debugMode){
 	unsigned int count = 0;
-	for(unsigned int i=0;i<processes.lenURL;i++){
+	for(unsigned int i=0;i<*(processes.lenURL);i++){
 		if(processes.arrivals[processes.unReadyList[0]]<=time){
 //			if(!count)
 			enqueue(dequeue(processes, unReadyList, debugMode),processes,debugMode);
@@ -23,9 +23,9 @@ unsigned int checkArrivals(unsigned int time, struct processesData processes, un
 	return count;
 }
 //TODO: SPECIFICHE.
-void restoreQueues(struct processesData processes, unsigned int debugMode){
-	processes.lenRL = 0;
-	processes.lenURL = processes.length;
+void restoreQueues(struct processesData processes, unsigned short int debugMode){
+	*(processes.lenRL) = 0;
+	*(processes.lenURL) = processes.length;
 	for(unsigned int i=0;i<processes.length;++i){
 		processes.unReadyList[i] = i;
 		processes.readyList[i] = 0;
@@ -40,7 +40,7 @@ void restoreQueues(struct processesData processes, unsigned int debugMode){
  * @param debugMode 0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return EOF in caso di errore, altrimenti restituisce l'indice del processo rimosso
  */
-int removeProcessAt(unsigned int index, struct processesData processes, enum listType lt, unsigned int debugMode){
+int removeProcessAt(unsigned int index, struct processesData processes, enum listType lt, unsigned short int debugMode){
 	int temp = EOF;
 	unsigned int length = 0;
 	unsigned int* pointer;
@@ -53,34 +53,34 @@ int removeProcessAt(unsigned int index, struct processesData processes, enum lis
 		return EOF;
 	}
 	if(lt==readyList){
-		if(!processes.lenRL){
+		if(!*(processes.lenRL)){
 			fprintf(stderr,"ERRORE. La Ready List e' vuota.\n");
 			return EOF;
 		}
-		if(index>=processes.lenRL){
+		if(index>=*(processes.lenRL)){
 			fprintf(stderr,"ERRORE. L'indice %u non e' disponibile in Ready List.\n",index);
 			return EOF;
 		}
 		if(debugMode)
 			printf("DEBUG Rimozione processo da Ready List.\n");
 		pointer = processes.readyList;
-		length = processes.lenRL;
-		--processes.lenRL;
+		length = *(processes.lenRL);
+		--*(processes.lenRL);
 	}
 	else if(lt==unReadyList){
-		if(!processes.lenURL){
+		if(!*(processes.lenURL)){
 			fprintf(stderr,"ERRORE. La unReady List e' vuota.\n");
 			return EOF;
 		}
-		if(index>=processes.lenURL){
+		if(index>=*(processes.lenURL)){
 			fprintf(stderr,"ERRORE. L'indice %u non e' disponibile in unReady List.\n",index);
 			return EOF;
 		}
 		if(debugMode)
 			printf("DEBUG Rimozione processo da UnReady List.\n");
 		pointer = processes.unReadyList;
-		length = processes.lenURL;
-		--processes.lenURL;
+		length = *(processes.lenURL);
+		--*(processes.lenURL);
 	}
 	else{
 		fprintf(stderr,"ERRORE SCONOSCIUTO in fase di rimozione.\n");
@@ -98,27 +98,28 @@ int removeProcessAt(unsigned int index, struct processesData processes, enum lis
 
 // Funzione che inserisce l'indice dato di un processo in RL.
 // TODO: SPECIFICHE.
-int addProcessAt(unsigned int processIndex, unsigned int targetIndex, struct processesData processes, unsigned int debugMode){
+int addProcessAt(unsigned int processIndex, unsigned int targetIndex, struct processesData processes, unsigned short int debugMode){
 	if(processIndex >= processes.length){
 		nonValidIndexError(processIndex);
 		return EOF;
 	}
-	if(targetIndex > processes.lenRL){
+	if(targetIndex > *(processes.lenRL)){
 		nonValidIndexError(targetIndex);
 		return EOF;
 	}
 	processes.readyList[targetIndex] = processIndex;
+	++*(processes.lenRL);
 	return 0;
 }
 
 // Funzione che mette un processo in coda a RL.
 // TODO: SPECIFICHE.
-int enqueue(unsigned int processIndex, struct processesData processes, unsigned int debugMode){
-	return addProcessAt(processIndex, processes.lenURL, processes, debugMode);
+int enqueue(unsigned int processIndex, struct processesData processes, unsigned short int debugMode){
+	return addProcessAt(processIndex, *(processes.lenRL), processes, debugMode);
 }
 // Funzione che rimuove il primo processo in RL o uRL.
 // TODO: SPECIFICHE.
-int dequeue(struct processesData processes, enum listType lt, unsigned int debugMode){
+int dequeue(struct processesData processes, enum listType lt, unsigned short int debugMode){
 	return removeProcessAt(0, processes, lt, debugMode);
 }
 /**
@@ -130,9 +131,9 @@ int dequeue(struct processesData processes, enum listType lt, unsigned int debug
  * @return EOF in caso di indice errato, altrimenti viene restituito 0.
  * TODO: Restituire il nuovo indice, anziche' 0. Da gestire i casi degeneri.
  */
-int putOnHead(unsigned int index, struct processesData processes, unsigned int debugMode){
+int putOnHead(unsigned int index, struct processesData processes, unsigned short int debugMode){
 	unsigned int i;
-	if(index>=processes.lenURL || index>=processes.length){
+	if(index>=*(processes.lenURL) || index>=processes.length){
 		nonValidIndexError(index);
 		return EOF;
 	}
@@ -164,18 +165,20 @@ void nonValidIndexError(unsigned int index){
  * @param debugMode 0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * TODO: Implementare algoritmo migliore (si usera' Insertion Sort dall'inizio, quindi questa funzione non ci sara' piu'.
  */
-void sortPerArrival(struct processesData processes, unsigned int debugMode){
+void sortPerArrival(struct processesData processes, unsigned short int debugMode){
 	unsigned int value;
 	unsigned int nextValue;
 	unsigned int swaps = 0;
-	for(int i=processes.lenURL; i>0 && (swaps || (i!=processes.lenURL)); --i){
+	unsigned int temp = 0;
+	for(unsigned int i=*(processes.lenURL); i>0 && (swaps || (i==*(processes.lenURL))); --i){
 		swaps = 0;
 		for(int j=0;j<i; ++j){
-			value = processes.unReadyList[j];
-			nextValue = processes.unReadyList[j];
+			value = processes.arrivals[processes.unReadyList[j]];
+			nextValue = processes.arrivals[processes.unReadyList[j]];
 			if(nextValue<value){
-				processes.unReadyList[j] = nextValue;
-				processes.unReadyList[j+1] = value;
+				temp = processes.unReadyList[j];
+				processes.unReadyList[j] = processes.unReadyList[j+1];
+				processes.unReadyList[j+1] = temp;
 				++swaps;
 			}
 		}
@@ -194,15 +197,15 @@ void sortPerArrival(struct processesData processes, unsigned int debugMode){
  * @return EOF in caso di errore, 0 se viene eseguito correttamente.
  * TODO: Estendere printArray anche per altre liste.
  */
-int printArray(struct processesData processes, enum listType lt, unsigned int debugMode){
+int printArray(struct processesData processes, enum listType lt, unsigned short int debugMode){
 	unsigned int length;
 	unsigned int* pointer;
 	if(lt==readyList){
-		length = processes.lenRL;
+		length = *(processes.lenRL);
 		pointer = processes.readyList;
 	}
 	else if(lt==unReadyList){
-		length = processes.lenURL;
+		length = *(processes.lenURL);
 		pointer = processes.unReadyList;
 	}
 	else{

@@ -48,7 +48,7 @@ short int selectMode(unsigned short int debugMode);
 // Funzione che scansiona rapidamente il file, contando quanti processi ci sono.
 int countProcesses(char* buffer, unsigned short int debugMode);
 // Funzione che preprocessa il buffer, sostituendo i token separatori in spazi.
-int preProcess(char* buffer, unsigned int debugMode);
+int preProcess(char* buffer, unsigned short int debugMode);
 // Funzione che memorizza il contenuto del buffer nei vari array.
 int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode);
 // Funzione che libera lo spazio allocato dinamicamente per l'array dei nomi di processo.

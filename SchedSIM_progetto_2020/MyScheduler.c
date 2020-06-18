@@ -27,10 +27,14 @@ int main(int argc, char * argv[]){
 	}
 	// I puntatori ai dati verranno memorizzati in questa struct.
 	struct processesData structure;
+	// Lunghezza della Ready List e della unReady List.
+	unsigned int lenRL = 0;
+	unsigned int lenURL = 0;
+
 	int numberOfProcesses = 0;
 	short int mode = DEFAULT_MODE;
-	unsigned short int dynamicAllocations = 0;
 	unsigned short int debugMode = 0;
+	unsigned short int dynamicAllocations = 0;
 
 	/** DEBUG MODE (passato per argomento):
 	 * 0) [DEFAULT] DISATTIVATO (Modalita' essenziale - release)
@@ -93,6 +97,8 @@ int main(int argc, char * argv[]){
 	structure.durations = durations;
 	structure.readyList = readyList;
 	structure.unReadyList = unReadyList;
+	structure.lenRL = &lenRL;
+	structure.lenURL = &lenURL;
 
 	if(mode != EOF)
 		dynamicAllocations = importProcesses(buffer, structure, debugMode);
