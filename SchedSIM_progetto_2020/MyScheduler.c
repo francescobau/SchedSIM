@@ -13,6 +13,9 @@
 
 #include "Utils_main.h"
 
+void notAvailable(unsigned int mode){
+	fprintf(stderr,"La modalita' scelta (%u) non e' attualmente disponibile.\n",mode);
+}
 
 int main(int argc, char * argv[]){
 	FILE *file;
@@ -24,10 +27,14 @@ int main(int argc, char * argv[]){
 	}
 	// I puntatori ai dati verranno memorizzati in questa struct.
 	struct processesData structure;
+	// Lunghezza della Ready List e della unReady List.
+	unsigned int lenRL = 0;
+	unsigned int lenURL = 0;
+
 	int numberOfProcesses = 0;
 	short int mode = DEFAULT_MODE;
-	unsigned short int dynamicAllocations = 0;
 	unsigned short int debugMode = 0;
+	unsigned short int dynamicAllocations = 0;
 
 	/** DEBUG MODE (passato per argomento):
 	 * 0) [DEFAULT] DISATTIVATO (Modalita' essenziale - release)
@@ -90,10 +97,8 @@ int main(int argc, char * argv[]){
 	structure.durations = durations;
 	structure.readyList = readyList;
 	structure.unReadyList = unReadyList;
-
-	// Reimposto la Ready List e la Unready List
-	// (e, quindi, anche le loro lunghezze).
-	restoreQueues(structure, debugMode);
+	structure.lenRL = &lenRL;
+	structure.lenURL = &lenURL;
 
 	if(mode != EOF)
 		dynamicAllocations = importProcesses(buffer, structure, debugMode);
@@ -101,9 +106,13 @@ int main(int argc, char * argv[]){
 	while(mode>0 && dynamicAllocations==numberOfProcesses){
 		// Selezione della modalita'.
 		mode = selectMode(debugMode);
+		// Reimposto la Ready List e la Unready List
+		// (e, quindi, anche le loro lunghezze).
+		restoreQueues(structure, debugMode);
 		switch(mode){
 		case FCFS_MODE:{
 			// FCFS (First Come, First Served)
+			printf("Algoritmo scelto: FCFS\n");
 			if(debugMode)
 				printf("EXPECTED PARAMETERS:\nprocesses = %p\narrivals = %p\ndurations = %p\nreadyList = %p\n",processes, arrivals, durations, readyList);
 			emulateFCFS(structure, debugMode);
@@ -111,22 +120,30 @@ int main(int argc, char * argv[]){
 		}
 		case RR_MODE:{
 			// RR (Round Robin)
+			printf("Algoritmo scelto: RR\n");
 			emulateRR(structure, debugMode);
+			notAvailable(mode);
 			break;
 		}
 		case PS_MODE:{
 			// PS (Priority Scheduling)
+			printf("Algoritmo scelto: PS\n");
 			emulatePS(structure, debugMode);
+			notAvailable(mode);
 			break;
 		}
 		case SPN_MODE:{
 			// SPN (Shortest Process Next)
+			printf("Algoritmo scelto: SPN\n");
 			emulateSPN(structure, debugMode);
+			notAvailable(mode);
 			break;
 		}
 		case SRT_MODE:{
 			// SRT (Shortest Remaining Time)
+			printf("Algoritmo scelto: SRT\n");
 			emulateSRT(structure, debugMode);
+			notAvailable(mode);
 			break;
 		}
 		default:{
@@ -139,7 +156,6 @@ int main(int argc, char * argv[]){
 			break;
 		}
 		}
-		restoreQueues(structure, debugMode);
 	}
 	// Libero la memoria allocata.
 	free(buffer);

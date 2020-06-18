@@ -73,7 +73,7 @@ int countProcesses(char* buffer, unsigned short int debugMode){
 }
 
 //TODO: Specifiche
-int preProcess(char* buffer, unsigned int debugMode){
+int preProcess(char* buffer, unsigned short int debugMode){
 	// Contatore di caratteri separatori per ogni riga.
 	unsigned int tokenCounter = 0;
 	for(unsigned int i=0; i<=DEFAULT_SIZE && *(buffer+i)!='\0';++i){
