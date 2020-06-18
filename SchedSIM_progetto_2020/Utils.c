@@ -172,9 +172,9 @@ void sortPerArrival(struct processesData processes, unsigned short int debugMode
 	unsigned int temp = 0;
 	for(unsigned int i=*(processes.lenURL); i>0 && (swaps || (i==*(processes.lenURL))); --i){
 		swaps = 0;
-		for(int j=0;j<i; ++j){
+		for(unsigned int j=0;j<i-sizeof(char); ++j){
 			value = processes.arrivals[processes.unReadyList[j]];
-			nextValue = processes.arrivals[processes.unReadyList[j]];
+			nextValue = processes.arrivals[processes.unReadyList[j+1]];
 			if(nextValue<value){
 				temp = processes.unReadyList[j];
 				processes.unReadyList[j] = processes.unReadyList[j+1];

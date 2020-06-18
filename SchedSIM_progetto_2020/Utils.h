@@ -18,6 +18,11 @@
 #include <stdlib.h>
 #endif /* STDLIB_H_ */
 
+// Importazione condizionata di <string.h> .
+#ifndef STRING_H_
+#include <string.h>
+#endif /* STRING_H_ */
+
 struct processesData{
 	unsigned int length;
 	unsigned int* lenRL;

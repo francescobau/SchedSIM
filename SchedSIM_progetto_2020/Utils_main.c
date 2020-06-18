@@ -108,6 +108,7 @@ int preProcess(char* buffer, unsigned short int debugMode){
 int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode){
 	// Il puntatore da cui verranno estratti i dati dallo sscanf.
 	char* next = buffer;
+	char* temp = next;
 	// Memorizza il numero di token estratti con successo da sscanf.
 	int nTokens = 0;
 	unsigned int counter = 0;
@@ -124,9 +125,14 @@ int importProcesses(char* buffer, struct processesData processes, unsigned short
 			printf("DEBUG arrivals[%d] = %u\n",counter,processes.arrivals[counter]);
 			printf("DEBUG durations[%d] = %u\n",counter,processes.durations[counter]);
 		}
-		next = strchr(next,'\n');
+		next = strchr(temp,'\n');
+		temp = next;
 		if(next == NULL){
 			fprintf(stderr,"ERRORE SCONOSCIUTO IN FASE DI IMPORTAZIONE.\n");
+			return counter+sizeof(char);
+		}
+		if(!processes.durations[counter]){
+			fprintf(stderr,"ERRORE. Rilevato processo con durata nulla. Il programma verra' chiuso.\n");
 			return counter+sizeof(char);
 		}
 		++next;
