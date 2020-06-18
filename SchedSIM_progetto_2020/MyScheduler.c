@@ -1,9 +1,8 @@
 /*
  * MyScheduler.c
  *
- *  Created on:		1 giu 2020
- *      Author:		Francesco Bau'
- *      Matricola:	1136850
+ *      @author		Francesco Bau' 1136850
+ *      @since		1 giu 2020
  *
  * Questo programma simula uno scheduler, considerando il computer a singolo core.
  */
