@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 	fread(buffer, sizeof(char), DEFAULT_SIZE + 1, file);
 
 	// Conto il numero di processsi.
-	numberOfProcesses = countProcesses(buffer,debugMode);
+	numberOfProcesses = countProcesses(buffer, debugMode);
 	// Gestione di errori in countProcesses...
 	if (numberOfProcesses == EOF) {
 		fprintf(stderr,
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 		mode = EOF;
 	}
 	// Se non ci sono problemi, inizia la fase di preProcess.
-	else if (preProcess(buffer,debugMode) == EOF) {
+	else if (preProcess(buffer, debugMode) == EOF) {
 		fprintf(stderr,
 				"ERRORE. Sono stati rilevati piu' di %1$d token separatori in una sola riga di testo.\n"
 						"Accertarsi che i nomi dei processi non contengano i caratteri \',\' , \';\' , \'.\' o \':\' .\n"
@@ -176,8 +176,9 @@ int main(int argc, char *argv[]) {
 			// della modalita' non e' gestito bene, o c'e' stata una violazione del programma.
 			// quindi si assume un valore di default, segnalando a stderr.
 			// Se mode e' 0, allora questo passaggio viene ignorato.
-			if (mode && mode != EOF){
-				fprintf(stderr,"La modalita' scelta non e' valida. Riprovare.\n");
+			if (mode && mode != EOF) {
+				fprintf(stderr,
+						"La modalita' scelta non e' valida. Riprovare.\n");
 				mode = DEFAULT_MODE;
 			}
 			break;

@@ -1,0 +1,41 @@
+\hypertarget{SchedulerPS_8c}{}\doxysection{Scheduler\+P\+S.\+c File Reference}
+\label{SchedulerPS_8c}\index{SchedulerPS.c@{SchedulerPS.c}}
+{\ttfamily \#include \char`\"{}Scheduler\+P\+S.\+h\char`\"{}}\newline
+Include dependency graph for Scheduler\+P\+S.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{SchedulerPS_8c_aed367408d6a1c0c371bf419c0561ecbe}{emulate\+PS}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+void \mbox{\hyperlink{SchedulerPS_8c_ae1d0471241b4552ced1ac25ba31fc0af}{restore\+Default\+Priorities}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{SchedulerPS_8c_aed367408d6a1c0c371bf419c0561ecbe}\label{SchedulerPS_8c_aed367408d6a1c0c371bf419c0561ecbe}} 
+\index{SchedulerPS.c@{SchedulerPS.c}!emulatePS@{emulatePS}}
+\index{emulatePS@{emulatePS}!SchedulerPS.c@{SchedulerPS.c}}
+\doxysubsubsection{\texorpdfstring{emulatePS()}{emulatePS()}}
+{\footnotesize\ttfamily void emulate\+PS (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Esecuzione dell\textquotesingle{}algoritmo PS.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi.\\
+\hline
+\end{DoxyParams}
+T\+O\+DO\+: Ottimizzare codice. \mbox{\Hypertarget{SchedulerPS_8c_ae1d0471241b4552ced1ac25ba31fc0af}\label{SchedulerPS_8c_ae1d0471241b4552ced1ac25ba31fc0af}} 
+\index{SchedulerPS.c@{SchedulerPS.c}!restoreDefaultPriorities@{restoreDefaultPriorities}}
+\index{restoreDefaultPriorities@{restoreDefaultPriorities}!SchedulerPS.c@{SchedulerPS.c}}
+\doxysubsubsection{\texorpdfstring{restoreDefaultPriorities()}{restoreDefaultPriorities()}}
+{\footnotesize\ttfamily void restore\+Default\+Priorities (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione per ripristinare le priorita\textquotesingle{} ai valori di default.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
