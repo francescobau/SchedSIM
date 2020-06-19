@@ -32,21 +32,20 @@ void emulatePS(struct processesData processes) {
 			*(processes.lenRL) > 0 || *(processes.lenURL) > 0
 					|| timeRemaining > 0; ++time) {
 		arrivalsCount = 0;
+		// Applico la tecnica di aging ai processi che hanno aspettato in RL all'istante precedente.
+		// Non viene applicata a chi sta per essere messo in RL.
+		increasePriorities(processes);
 		if (*(processes.lenURL)) {
 			arrivalsCount = checkArrivals(time, processes);
 		}
 		if (*(processes.lenRL)) {
+			// Se l'ID Processo corrente e' stato acquisito, allora in questo momento e' terminato.
 			if (currentProcessID != processes.length) {
-				// Se l'ID Processo corrente e' stato acquisito, allora in questo momento e' terminato.
-				if (!timeRemaining) {
+				if (!timeRemaining)
 					printf("Esecuzione processo \" %s \" terminata.\n",
 							processes.processes[currentProcessID]);
-					currentProcessID = dequeue(processes, readyList);
-				}
-				// Se dei processi sono appena arrivati in Ready List, e c'erano gia' dei processi
-				// che aspettavano in RL, allora si mette il processo in coda RL, che cede
-				// l'esecuzione al prossimo processo in RL.
-				else if (arrivalsCount && arrivalsCount < *(processes.lenRL)) {
+				else if (arrivalsCount
+						&& hasLowerPriority(currentProcessID, processes)) {
 					printf(
 							"Il processo \" %s \" si mette in coda di Ready List.\n",
 							processes.processes[currentProcessID]);
@@ -54,22 +53,21 @@ void emulatePS(struct processesData processes) {
 					currentProcessID = dequeue(processes, readyList);
 				}
 			}
-			// Caso in cui currentProcessID e timeRemaining siano ancora di default.
-			else {
+			// timeRemaining e' 0 di default, ma questa operazione va fatta in ogni caso, quando timeRemaining e' 0.
+			if (!timeRemaining)
 				currentProcessID = dequeue(processes, readyList);
-			}
+			// Sincronizzo timeRemaining.
 			timeRemaining = processes.leftovers[currentProcessID];
 		}
-		printf("[T=%u]\nESECUZIONE: %s [ID = %u]\n", time,
-				processes.processes[currentProcessID], currentProcessID);
+		printf("[T=%u]\nESECUZIONE: %s [ID = %u] [P = %u]\n", time,
+				processes.processes[currentProcessID], currentProcessID,
+				processes.priorities[currentProcessID]);
 		printf("Tempo rimasto: %u\n", timeRemaining);
-		if (arrivalsCount) {
-			printf("Ready List:\n");
-			printArray(processes, readyList);
-			if (dm) {
-				printf("DEBUG unReady List:\n");
-				printArray(processes, unReadyList);
-			}
+		printf("Ready List:\n");
+		printArray(processes, readyList);
+		if (dm) {
+			printf("DEBUG unReady List:\n");
+			printArray(processes, unReadyList);
 		}
 		if (timeRemaining)
 			--(processes.leftovers[currentProcessID]);
@@ -90,5 +88,32 @@ void emulatePS(struct processesData processes) {
 void restoreDefaultPriorities(struct processesData processes) {
 	for (unsigned int i = 0; i < processes.length; ++i) {
 		processes.priorities[i] = 0;
+	}
+}
+
+/**
+ *TODO: SPECIFICHE.
+ *
+ */
+int hasLowerPriority(unsigned int currentIndex, struct processesData processes) {
+	if (processes.debugMode)
+		printf("DEBUG VALORE DI RETURN: %d",
+				processes.priorities[currentIndex]
+						< processes.priorities[processes.readyList[0]]);
+	return processes.priorities[currentIndex]
+			< processes.priorities[processes.readyList[0]];
+}
+/**
+ *TODO: SPECIFICHE.
+ */
+void increasePriorities(struct processesData processes) {
+	unsigned int dm = processes.debugMode;
+	dm = 1;
+	for (unsigned int i = 0; i < *(processes.lenRL); ++i) {
+		++(processes.priorities[processes.readyList[i]]);
+		if (dm)
+			printf("DEBUG increased priority: [ID=%u] [P=%u]\n",
+					processes.readyList[i],
+					processes.priorities[processes.readyList[i]]);
 	}
 }

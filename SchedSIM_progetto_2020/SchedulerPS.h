@@ -17,5 +17,8 @@
 void emulatePS(struct processesData processes);
 // Ripristino dell'array delle priorita' ai valori di default.
 void restoreDefaultPriorities(struct processesData processes);
-
+// Funzione che restituisce 1 se il primo processo in Ready List ha priorita' maggiore di quello in esecuzione.
+int hasLowerPriority(unsigned int currentIndex, struct processesData processes);
+// Funzione che applica la tecnica di aging ai processi che hanno atteso in Ready List.
+void increasePriorities(struct processesData processes);
 #endif /* SCHEDULERPS_H_ */

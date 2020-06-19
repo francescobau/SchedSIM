@@ -248,9 +248,9 @@ int printArray(struct processesData processes, enum listType lt) {
 		return EOF;
 	}
 	for (unsigned int i = 0; i < length; ++i) {
-		printf("[%u] -> %s [ID = %u] [TL = %u]\n", i,
+		printf("[%u] -> %s [ID = %u] [TR = %u] [P=%u]\n", i,
 				processes.processes[pointer[i]], pointer[i],
-				processes.leftovers[pointer[i]]);
+				processes.leftovers[pointer[i]], processes.priorities[pointer[i]]);
 	}
 	if (!length)
 		printf("[Empty]\n");
