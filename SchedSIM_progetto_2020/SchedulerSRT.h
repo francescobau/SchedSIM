@@ -14,6 +14,6 @@
 #endif /* UTILS_H_ */
 
 // Esecuzione dell'algoritmo SRT.
-void emulateSRT(struct processesData processes, unsigned short int debugMode);
+void emulateSRT(struct processesData processes);
 
 #endif /* SCHEDULERSRT_H_ */

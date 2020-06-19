@@ -111,15 +111,15 @@ int preProcess(char *buffer, unsigned short int debugMode) {
  *
  * @param buffer 		Il buffer da scansionare.
  * @param processes 	Le proprieta' dei vari processi.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return 				Il numero di aree di memoria allocate dinamicamente per i processi.
  */
-int importProcesses(char *buffer, struct processesData processes,
-		unsigned short int debugMode) {
+int importProcesses(char *buffer, struct processesData processes) {
 	// Il puntatore da cui verranno estratti i dati dallo sscanf.
 	char *next = buffer;
 	// Memorizza il numero di token estratti con successo da sscanf.
+
 	int nTokens = 0;
+	unsigned short int dm = processes.debugMode;
 	unsigned int counter = 0;
 	for (counter = 0;
 			counter < processes.length && next < buffer + DEFAULT_SIZE;
@@ -135,7 +135,7 @@ int importProcesses(char *buffer, struct processesData processes,
 					nTokens, MAX_TOKENS);
 			return counter + sizeof(char);
 		}
-		if (debugMode) {
+		if (dm) {
 			printf("DEBUG processes[%d] = %s\n", counter,
 					processes.processes[counter]);
 			printf("DEBUG arrivals[%d] = %u\n", counter,
@@ -155,7 +155,7 @@ int importProcesses(char *buffer, struct processesData processes,
 		}
 		++next;
 	}
-	if (debugMode)
+	if (dm)
 		printf("DEBUG i = %u\n", counter);
 	return counter;
 }
@@ -165,13 +165,11 @@ int importProcesses(char *buffer, struct processesData processes,
  *
  * @param processes 	Le proprieta' dei vari processi.
  * @param amount		La quantita' di spazi allocati dinamicamente da liberare.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  */
-void freeArray(struct processesData processes, unsigned short int amount,
-		unsigned short int debugMode) {
+void freeArray(struct processesData processes, unsigned short int amount) {
 	for (unsigned int i = 0; i < amount && i < processes.length; ++i) {
 		free(processes.processes[i]);
-		if (debugMode)
+		if (processes.debugMode)
 			printf("DEBUG MEMORIA LIBERATA: %d\n", i);
 	}
 }

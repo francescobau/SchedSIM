@@ -14,6 +14,6 @@
 #endif /* UTILS_H_ */
 
 // Esecuzione dell'algoritmo SPN.
-void emulateSPN(struct processesData processes, unsigned short int debugMode);
+void emulateSPN(struct processesData processes);
 
 #endif /* SCHEDULERSPN_H_ */

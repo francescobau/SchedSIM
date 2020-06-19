@@ -14,6 +14,6 @@
 #endif /* UTILS_H_ */
 
 // Esecuzione dell'algoritmo RR.
-void emulateRR(struct processesData processes, unsigned short int debugMode);
+void emulateRR(struct processesData processes);
 
 #endif /* SCHEDULERRR_H_ */

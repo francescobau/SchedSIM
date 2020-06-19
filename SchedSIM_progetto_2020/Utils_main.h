@@ -52,10 +52,8 @@ int countProcesses(char *buffer, unsigned short int debugMode);
 // Funzione che preprocessa il buffer, sostituendo i token separatori in spazi.
 int preProcess(char *buffer, unsigned short int debugMode);
 // Funzione che memorizza il contenuto del buffer nei vari array.
-int importProcesses(char *buffer, struct processesData processes,
-		unsigned short int debugMode);
+int importProcesses(char *buffer, struct processesData processes);
 // Funzione che libera lo spazio allocato dinamicamente per l'array dei nomi di processo.
-void freeArray(struct processesData processes, unsigned short int amount,
-		unsigned short int debugMode);
+void freeArray(struct processesData processes, unsigned short int amount);
 
 #endif /* UTILS_MAIN_H_ */

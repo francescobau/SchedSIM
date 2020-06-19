@@ -14,6 +14,6 @@
 #endif /* UTILS_H_ */
 
 // Esecuzione dell'algoritmo FCFS.
-void emulateFCFS(struct processesData processes, unsigned short int debugMode);
+void emulateFCFS(struct processesData processes);
 
 #endif /* SCHEDULERFCFS_H_ */

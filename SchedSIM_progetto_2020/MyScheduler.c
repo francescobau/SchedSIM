@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 	fread(buffer, sizeof(char), DEFAULT_SIZE + 1, file);
 
 	// Conto il numero di processsi.
-	numberOfProcesses = countProcesses(buffer, debugMode);
+	numberOfProcesses = countProcesses(buffer,debugMode);
 	// Gestione di errori in countProcesses...
 	if (numberOfProcesses == EOF) {
 		fprintf(stderr,
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 		mode = EOF;
 	}
 	// Se non ci sono problemi, inizia la fase di preProcess.
-	else if (preProcess(buffer, debugMode) == EOF) {
+	else if (preProcess(buffer,debugMode) == EOF) {
 		fprintf(stderr,
 				"ERRORE. Sono stati rilevati piu' di %1$d token separatori in una sola riga di testo.\n"
 						"Accertarsi che i nomi dei processi non contengano i caratteri \',\' , \';\' , \'.\' o \':\' .\n"
@@ -107,9 +107,12 @@ int main(int argc, char *argv[]) {
 	unsigned int unReadyList[numberOfProcesses];
 	// Lista dei tempi rimanenti.
 	unsigned int leftovers[numberOfProcesses];
+	// Lista delle priorita'.
+	unsigned int priorities[numberOfProcesses];
 
-	// Salvo i puntatori nella struct. Ad eccezione di length, che e' sempre fisso.
+	// Salvo i puntatori nella struct. Ad eccezione dei valori read-only.
 	structure.length = numberOfProcesses;
+	structure.debugMode = debugMode;
 	structure.processes = processes;
 	structure.arrivals = arrivals;
 	structure.durations = durations;
@@ -118,9 +121,10 @@ int main(int argc, char *argv[]) {
 	structure.lenRL = &lenRL;
 	structure.lenURL = &lenURL;
 	structure.leftovers = leftovers;
+	structure.priorities = priorities;
 
 	if (mode != EOF)
-		dynamicAllocations = importProcesses(buffer, structure, debugMode);
+		dynamicAllocations = importProcesses(buffer, structure);
 	// Continua ad eseguire, fino a quando viene inserito 0.
 	// Se le allocazioni dinamiche non corrispondono al numero
 	// di processi, allora significa che non si ha importato
@@ -129,7 +133,7 @@ int main(int argc, char *argv[]) {
 		// Selezione della modalita'.
 		mode = selectMode(debugMode);
 		// Reimposto le liste variabili.
-		restoreLists(structure, debugMode);
+		restoreLists(structure);
 		switch (mode) {
 		case FCFS_MODE: {
 			// FCFS (First Come, First Served)
@@ -138,32 +142,32 @@ int main(int argc, char *argv[]) {
 				printf(
 						"EXPECTED PARAMETERS:\nprocesses = %p\narrivals = %p\ndurations = %p\nreadyList = %p\n",
 						processes, arrivals, durations, readyList);
-			emulateFCFS(structure, debugMode);
+			emulateFCFS(structure);
 			break;
 		}
 		case RR_MODE: {
 			// RR (Round Robin)
 			printf("Algoritmo scelto: RR\n");
-			emulateRR(structure, debugMode);
+			emulateRR(structure);
 			break;
 		}
 		case PS_MODE: {
 			// PS (Priority Scheduling)
 			printf("Algoritmo scelto: PS\n");
-			emulatePS(structure, debugMode);
+			emulatePS(structure);
 			break;
 		}
 		case SPN_MODE: {
 			// SPN (Shortest Process Next)
 			printf("Algoritmo scelto: SPN\n");
-			emulateSPN(structure, debugMode);
+			emulateSPN(structure);
 			notAvailable(mode);
 			break;
 		}
 		case SRT_MODE: {
 			// SRT (Shortest Remaining Time)
 			printf("Algoritmo scelto: SRT\n");
-			emulateSRT(structure, debugMode);
+			emulateSRT(structure);
 			notAvailable(mode);
 			break;
 		}
@@ -185,7 +189,7 @@ int main(int argc, char *argv[]) {
 	// Chiudo il file.
 	fclose(file);
 	// Libero la memoria allocata dinamicamente nell'array di processi.
-	freeArray(structure, dynamicAllocations, debugMode);
+	freeArray(structure, dynamicAllocations);
 
 	printf("Chiusura del programma in corso...\n");
 

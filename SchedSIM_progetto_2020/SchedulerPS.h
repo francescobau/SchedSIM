@@ -14,6 +14,8 @@
 #endif /* UTILS_H_ */
 
 // Esecuzione dell'algoritmo PS.
-void emulatePS(struct processesData processes, unsigned short int debugMode);
+void emulatePS(struct processesData processes);
+// Ripristino dell'array delle priorita' ai valori di default.
+void restoreDefaultPriorities(struct processesData processes);
 
 #endif /* SCHEDULERPS_H_ */

@@ -13,18 +13,16 @@
  *
  * @param time			L'istante di tempo preso in considerazione.
  * @param processes 	Le proprieta' dei vari processi.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return 				il numero di processi che entrano in coda RL.
+ *
  * TODO: Gestione avanzata per algoritmi piu' avanzati.
  */
-unsigned int checkArrivals(unsigned int time, struct processesData processes,
-		unsigned short int debugMode) {
+unsigned int checkArrivals(unsigned int time, struct processesData processes) {
 	unsigned int count = 0;
 	for (unsigned int i = 0; i < *(processes.lenURL); i++) {
 		if (processes.arrivals[processes.unReadyList[0]] <= time) {
 			// Si mette in coda RL cio' il primo elemento di uRL.
-			enqueue(dequeue(processes, unReadyList, debugMode), processes,
-					debugMode);
+			enqueue(dequeue(processes, unReadyList), processes);
 			++count;
 		}
 	}
@@ -34,9 +32,8 @@ unsigned int checkArrivals(unsigned int time, struct processesData processes,
  * Funzione che ripristina RL e uRL allo stato iniziale.
  *
  * @param processes 	Le proprieta' dei vari processi.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  */
-void restoreLists(struct processesData processes, unsigned short int debugMode) {
+void restoreLists(struct processesData processes) {
 	*(processes.lenRL) = 0;
 	*(processes.lenURL) = processes.length;
 	for (unsigned int i = 0; i < processes.length; ++i) {
@@ -51,11 +48,11 @@ void restoreLists(struct processesData processes, unsigned short int debugMode) 
  * @param index 		L'indice di RL o uRL considerato.
  * @param processes 	Le proprieta' dei vari processi.
  * @param lt			Specifica se si vuole considerare Ready List o unReady List.
- * @param debugMode		0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return				EOF in caso di errore, altrimenti restituisce l'indice del processo rimosso.
  */
 int removeProcessAt(unsigned int index, struct processesData processes,
-		enum listType lt, unsigned short int debugMode) {
+		enum listType lt) {
+	unsigned short int dm = processes.debugMode;
 	int temp = EOF;
 	unsigned int length = 0;
 	unsigned int *pointer;
@@ -78,7 +75,7 @@ int removeProcessAt(unsigned int index, struct processesData processes,
 					index);
 			return EOF;
 		}
-		if (debugMode)
+		if (dm)
 			printf("DEBUG Rimozione processo da Ready List.\n");
 		pointer = processes.readyList;
 		length = *(processes.lenRL);
@@ -94,7 +91,7 @@ int removeProcessAt(unsigned int index, struct processesData processes,
 					index);
 			return EOF;
 		}
-		if (debugMode)
+		if (dm)
 			printf("DEBUG Rimozione processo da UnReady List.\n");
 		pointer = processes.unReadyList;
 		length = *(processes.lenURL);
@@ -107,7 +104,7 @@ int removeProcessAt(unsigned int index, struct processesData processes,
 	for (unsigned int i = index; i < length; ++i) {
 		pointer[i] = pointer[i + 1];
 	}
-	if (debugMode)
+	if (dm)
 		printf("DEBUG Processo n. %u rimosso.\n"
 				"Nome Processo eliminato: %s\n", temp,
 				processes.processes[temp]);
@@ -119,11 +116,10 @@ int removeProcessAt(unsigned int index, struct processesData processes,
  * @param processIndex	L'indice del processo considerato, da inserire in Ready List.
  * @param targetIndex	L'indice della Ready List in cui processIndex sara' inserito.
  * @param processes 	Le proprieta' dei vari processi.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return				EOF in caso di errore, 0 altrimenti.
  */
 int addProcessAt(unsigned int processIndex, unsigned int targetIndex,
-		struct processesData processes, unsigned short int debugMode) {
+		struct processesData processes) {
 	if (processIndex >= processes.length) {
 		nonValidIndexError(processIndex);
 		return EOF;
@@ -142,35 +138,31 @@ int addProcessAt(unsigned int processIndex, unsigned int targetIndex,
  *
  * @param processIndex	L'indice del processo considerato, da inserire in coda di Ready List.
  * @param processes 	Le proprieta' dei vari processi.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return				EOF in caso di errore, 0 altrimenti.
  */
-int enqueue(unsigned int processIndex, struct processesData processes,
-		unsigned short int debugMode) {
-	return addProcessAt(processIndex, *(processes.lenRL), processes, debugMode);
+int enqueue(unsigned int processIndex, struct processesData processes) {
+	return addProcessAt(processIndex, *(processes.lenRL), processes);
 }
 /**
  * Funzione che rimuove il primo processo in RL o uRL.
  *
  * @param processes 	Le proprieta' dei vari processi.
  * @param lt			Specifica se si vuole considerare Ready List o unReady List.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  */
-int dequeue(struct processesData processes, enum listType lt,
-		unsigned short int debugMode) {
-	return removeProcessAt(0, processes, lt, debugMode);
+int dequeue(struct processesData processes, enum listType lt) {
+	return removeProcessAt(0, processes, lt);
 }
 /**
  * Funzione che sposta in testa un processo da uRL.
  *
  * @param index		L'indice di uRL considerato.
  * @param processes Le proprieta' dei vari processi.
- * @param debugMode 0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return 			EOF in caso di indice errato, altrimenti viene restituito 0.
+ *
  * TODO: Restituire il nuovo indice, anziche' 0. Da gestire i casi degeneri.
  */
-int putOnHead(unsigned int index, struct processesData processes,
-		unsigned short int debugMode) {
+int putOnHead(unsigned int index, struct processesData processes) {
+	unsigned short int dm = processes.debugMode;
 	unsigned int i;
 	if (index >= *(processes.lenURL) || index >= processes.length) {
 		nonValidIndexError(index);
@@ -185,10 +177,10 @@ int putOnHead(unsigned int index, struct processesData processes,
 		unsigned int temp = processes.unReadyList[i];
 		processes.unReadyList[i] = processes.unReadyList[i + 1];
 		processes.unReadyList[i + 1] = temp;
-		if (debugMode)
+		if (dm)
 			printf("DEBUG i = %u\n", i);
 	}
-	if (debugMode)
+	if (dm)
 		printf("DEBUG i finale = %u\n", i);
 	return 0;
 }
@@ -203,12 +195,12 @@ void nonValidIndexError(unsigned int index) {
  * Funzione che riordina la unReady list. Viene usato un Bubble Sort ottimizzato.
  *
  * @param processes		Le proprieta' dei vari processi.
- * @param debugMode		0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
+ *
  * TODO: 	Implementare algoritmo migliore (si usera' Insertion Sort dall'inizio,
  * 			quindi questa funzione non ci sara' piu'.
  */
-void sortPerArrival(struct processesData processes,
-		unsigned short int debugMode) {
+void sortPerArrival(struct processesData processes) {
+	unsigned short int dm = processes.debugMode;
 	unsigned int value;
 	unsigned int nextValue;
 	unsigned int swaps = 0;
@@ -227,9 +219,9 @@ void sortPerArrival(struct processesData processes,
 			}
 		}
 	}
-	if (debugMode) {
+	if (dm) {
 		printf("DEBUG unReady List ordinata:\n");
-		printArray(processes, unReadyList, debugMode);
+		printArray(processes, unReadyList);
 	}
 }
 /**
@@ -237,13 +229,12 @@ void sortPerArrival(struct processesData processes,
  *
  * @param processes		Le proprieta' dei vari processi.
  * @param lt 			Specifica se si vuole considerare Ready List o unReady List.
- * @param debugMode 	0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
  * @return 				EOF in caso di errore, 0 se viene eseguito correttamente.
+ *
  * TODO: Estendere printArray anche per altre liste.
  * TODO: Migliorare il return, se necessario.
  */
-int printArray(struct processesData processes, enum listType lt,
-		unsigned short int debugMode) {
+int printArray(struct processesData processes, enum listType lt) {
 	unsigned int length;
 	unsigned int *pointer;
 	if (lt == readyList) {
