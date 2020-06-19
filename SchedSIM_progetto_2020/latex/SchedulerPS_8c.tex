@@ -36,13 +36,32 @@ T\+O\+DO\+: Ottimizzare codice. \mbox{\Hypertarget{SchedulerPS_8c_afeb2a09024963
 \doxysubsubsection{\texorpdfstring{hasLowerPriority()}{hasLowerPriority()}}
 {\footnotesize\ttfamily int has\+Lower\+Priority (\begin{DoxyParamCaption}\item[{unsigned int}]{current\+Index,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
 
-T\+O\+DO\+: S\+P\+E\+C\+I\+F\+I\+C\+HE. \mbox{\Hypertarget{SchedulerPS_8c_af88f4dbfbcebc0dce98e12b19b1a6f51}\label{SchedulerPS_8c_af88f4dbfbcebc0dce98e12b19b1a6f51}} 
+Funzione che verifica se il processo in esecuzione ha minore priorita\textquotesingle{} del primo processo in Ready List.
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Index} & l\textquotesingle{}indice del processo in esecuzione. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 se il primo processo in Ready List ha priorita\textquotesingle{} maggiore di quello in esecuzione, 0 altrimenti. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{SchedulerPS_8c_af88f4dbfbcebc0dce98e12b19b1a6f51}\label{SchedulerPS_8c_af88f4dbfbcebc0dce98e12b19b1a6f51}} 
 \index{SchedulerPS.c@{SchedulerPS.c}!increasePriorities@{increasePriorities}}
 \index{increasePriorities@{increasePriorities}!SchedulerPS.c@{SchedulerPS.c}}
 \doxysubsubsection{\texorpdfstring{increasePriorities()}{increasePriorities()}}
 {\footnotesize\ttfamily void increase\+Priorities (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
 
-T\+O\+DO\+: S\+P\+E\+C\+I\+F\+I\+C\+HE. \mbox{\Hypertarget{SchedulerPS_8c_ae1d0471241b4552ced1ac25ba31fc0af}\label{SchedulerPS_8c_ae1d0471241b4552ced1ac25ba31fc0af}} 
+Funzione che applica la tecnica di aging ai processi che hanno atteso in Ready List.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{SchedulerPS_8c_ae1d0471241b4552ced1ac25ba31fc0af}\label{SchedulerPS_8c_ae1d0471241b4552ced1ac25ba31fc0af}} 
 \index{SchedulerPS.c@{SchedulerPS.c}!restoreDefaultPriorities@{restoreDefaultPriorities}}
 \index{restoreDefaultPriorities@{restoreDefaultPriorities}!SchedulerPS.c@{SchedulerPS.c}}
 \doxysubsubsection{\texorpdfstring{restoreDefaultPriorities()}{restoreDefaultPriorities()}}

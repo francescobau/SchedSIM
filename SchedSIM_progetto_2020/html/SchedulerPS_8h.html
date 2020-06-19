@@ -146,7 +146,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>TODO: SPECIFICHE. </p>
+<p>Funzione che verifica se il processo in esecuzione ha minore priorita' del primo processo in Ready List.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">currentIndex</td><td>l'indice del processo in esecuzione. </td></tr>
+    <tr><td class="paramname">processes</td><td>Le proprieta' dei vari processi. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 se il primo processo in Ready List ha priorita' maggiore di quello in esecuzione, 0 altrimenti. </dd></dl>
 
 </div>
 </div>
@@ -165,7 +173,13 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>TODO: SPECIFICHE. </p>
+<p>Funzione che applica la tecnica di aging ai processi che hanno atteso in Ready List.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">processes</td><td>Le proprieta' dei vari processi. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

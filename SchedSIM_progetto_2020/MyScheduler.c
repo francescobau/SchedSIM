@@ -51,7 +51,8 @@ int main(int argc, char *argv[]) {
 	 */
 	if (argc > 1)
 		sscanf(argv[1], "%hu", &debugMode);
-	printf("DEBUG_MODE: %d\n", debugMode);
+	if(debugMode)
+		printf("DEBUG MODE ACTIVATED. Argument: %u\n", debugMode);
 
 	// Buffer per la lettura dei dati in input.
 	// Nella calloc si aggiunge un byte per il carattere \0 nel buffer.
