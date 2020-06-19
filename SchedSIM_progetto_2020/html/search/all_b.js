@@ -1,19 +1,8 @@
 var searchData=
 [
-  ['m_48',['M',['../my__wrong__processes2_8txt.html#aad05f78187c942f9dd521605fa81f1ba',1,'my_wrong_processes2.txt']]],
-  ['main_49',['main',['../MyScheduler_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'MyScheduler.c']]],
-  ['max_5ftokens_50',['MAX_TOKENS',['../Utils__main_8h.html#a09886d6ba96e67553bf3c49ed8ade975',1,'Utils_main.h']]],
-  ['mmm_51',['MMM',['../my__wrong__processes3_8txt.html#adc94400359436f34843a23fd3c50d7b0',1,'my_wrong_processes3.txt']]],
-  ['mode_5flength_52',['MODE_LENGTH',['../Utils__main_8h.html#a4454d9f41fcb54ec36eb81d72f401c72',1,'Utils_main.h']]],
-  ['my_5finvalid_5fprocesses_2etxt_53',['my_invalid_processes.txt',['../my__invalid__processes_8txt.html',1,'']]],
-  ['my_5fmixed_5fprocesses_2etxt_54',['my_mixed_processes.txt',['../my__mixed__processes_8txt.html',1,'']]],
-  ['my_5fprocesses_2etxt_55',['my_processes.txt',['../my__processes_8txt.html',1,'']]],
-  ['my_5fprocesses1_2etxt_56',['my_processes1.txt',['../my__processes1_8txt.html',1,'']]],
-  ['my_5fprocesses2_2etxt_57',['my_processes2.txt',['../my__processes2_8txt.html',1,'']]],
-  ['my_5fprocesses3_2etxt_58',['my_processes3.txt',['../my__processes3_8txt.html',1,'']]],
-  ['my_5fwrong_5fprocesses_2etxt_59',['my_wrong_processes.txt',['../my__wrong__processes_8txt.html',1,'']]],
-  ['my_5fwrong_5fprocesses1_2etxt_60',['my_wrong_processes1.txt',['../my__wrong__processes1_8txt.html',1,'']]],
-  ['my_5fwrong_5fprocesses2_2etxt_61',['my_wrong_processes2.txt',['../my__wrong__processes2_8txt.html',1,'']]],
-  ['my_5fwrong_5fprocesses3_2etxt_62',['my_wrong_processes3.txt',['../my__wrong__processes3_8txt.html',1,'']]],
-  ['myscheduler_2ec_63',['MyScheduler.c',['../MyScheduler_8c.html',1,'']]]
+  ['leftovers_45',['leftovers',['../structprocessesData.html#a34703d7f38b735fe7f2b9dcb4441069a',1,'processesData']]],
+  ['length_46',['length',['../structprocessesData.html#a30246af761e7cc79626c16fe051e843a',1,'processesData']]],
+  ['lenrl_47',['lenRL',['../structprocessesData.html#a3d2fd043651f6e828625d922a2a6f076',1,'processesData']]],
+  ['lenurl_48',['lenURL',['../structprocessesData.html#a3ec7a5ca5aa37481903f71333f3823d0',1,'processesData']]],
+  ['listtype_49',['listType',['../Utils_8h.html#a3f7c2b3e7d0d3addfe7bcec82dfe7a05',1,'Utils.h']]]
 ];

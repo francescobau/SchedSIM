@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['importprocesses_146',['importProcesses',['../Utils__main_8c.html#a15d1023c44bb3f53c0eefa3e3189000e',1,'importProcesses(char *buffer, struct processesData processes):&#160;Utils_main.c'],['../Utils__main_8h.html#a15d1023c44bb3f53c0eefa3e3189000e',1,'importProcesses(char *buffer, struct processesData processes):&#160;Utils_main.c']]]
+  ['haslowerpriority_148',['hasLowerPriority',['../SchedulerPS_8c.html#afeb2a09024963143d271e88b4c36f49e',1,'hasLowerPriority(unsigned int currentIndex, struct processesData processes):&#160;SchedulerPS.c'],['../SchedulerPS_8h.html#afeb2a09024963143d271e88b4c36f49e',1,'hasLowerPriority(unsigned int currentIndex, struct processesData processes):&#160;SchedulerPS.c']]]
 ];
