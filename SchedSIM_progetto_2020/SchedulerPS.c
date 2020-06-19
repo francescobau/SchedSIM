@@ -92,23 +92,29 @@ void restoreDefaultPriorities(struct processesData processes) {
 }
 
 /**
- *TODO: SPECIFICHE.
+ * Funzione che verifica se il processo in esecuzione ha minore priorita' del primo processo in Ready List.
+ *
+ * @param currentIndex l'indice del processo in esecuzione.
+ * @param processes 	Le proprieta' dei vari processi.
+ * @return 1 se il primo processo in Ready List ha priorita' maggiore di quello in esecuzione, 0 altrimenti.
  *
  */
 int hasLowerPriority(unsigned int currentIndex, struct processesData processes) {
-	if (processes.debugMode)
-		printf("DEBUG VALORE DI RETURN: %d",
+	unsigned int dm = processes.debugMode;
+	if (dm)
+		printf("DEBUG VALORE DI RETURN: %d\n",
 				processes.priorities[currentIndex]
 						< processes.priorities[processes.readyList[0]]);
 	return processes.priorities[currentIndex]
 			< processes.priorities[processes.readyList[0]];
 }
 /**
- *TODO: SPECIFICHE.
+ * Funzione che applica la tecnica di aging ai processi che hanno atteso in Ready List.
+ *
+ * @param processes 	Le proprieta' dei vari processi.
  */
 void increasePriorities(struct processesData processes) {
 	unsigned int dm = processes.debugMode;
-	dm = 1;
 	for (unsigned int i = 0; i < *(processes.lenRL); ++i) {
 		++(processes.priorities[processes.readyList[i]]);
 		if (dm)
