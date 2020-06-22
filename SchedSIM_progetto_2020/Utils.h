@@ -52,8 +52,12 @@ struct processesData {
 	unsigned int *priorities;
 };
 
-// enum per specificare se si vuole effettuare l'operazione
-// dalla Ready List o dalla unReady List.
+/**
+ * enum che specifica se si vuole effettuare una certa operazione
+ * dalla Ready List o dalla unReady List.
+ *
+ * TODO: Estendere enum.
+ */
 enum listType {
 	readyList, unReadyList
 };
