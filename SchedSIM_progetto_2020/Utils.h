@@ -23,6 +23,21 @@
 #include <string.h>
 #endif /* STRING_H_ */
 
+/**
+ * La struttura contenente le proprieta' dei processi, e le liste di gestione dei processi.
+ *
+ * @param debugMode		0 per Modalita' Release, altrimenti viene usata modalita' di Debug.
+ * @param length		Il numero di processi.
+ * @param lenRL			Puntatore al numero di processi in Ready List.
+ * @param lenURL		Puntatore al numero di processi in unReadyList
+ * @param processes 	Puntatore alla lista di nomi dei vari processi.
+ * @param arrivals		Puntatore alla lista contenente i tempi di arrivo dei vari processi.
+ * @param durations		Puntatore alla lista contenente le durate dei vari processi.
+ * @param readyList		Puntatore alla Ready List.
+ * @param unReadyList	Puntatore alla unReady List (lista di processi non ancora in Ready List).
+ * @param leftovers		Puntatore alla lista contenente i tempi rimanenti dei vari processi.
+ * @param priorities	Puntatore alla lista contenente le priorita' dei vari processi.
+ */
 struct processesData {
 	unsigned short int debugMode;
 	unsigned int length;
