@@ -1,8 +1,8 @@
 /*
  * SchedulerSRT.h
  *
- *  Created on: 7 giu 2020
- *      Author: francesco
+ *      @author		Francesco Bau' 1136850
+ *      @since		7 giu 2020
  */
 
 #ifndef SCHEDULERSRT_H_
@@ -13,7 +13,7 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-//TODO: Specifiche.
-void emulateSRT(struct processesData processes, unsigned short int debugMode);
+// Esecuzione dell'algoritmo SRT.
+void emulateSRT(struct processesData processes);
 
 #endif /* SCHEDULERSRT_H_ */

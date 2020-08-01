@@ -1,0 +1,36 @@
+\hypertarget{MyScheduler_8c}{}\doxysection{My\+Scheduler.\+c File Reference}
+\label{MyScheduler_8c}\index{MyScheduler.c@{MyScheduler.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Utils\+\_\+main.\+h\char`\"{}}\newline
+Include dependency graph for My\+Scheduler.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{MyScheduler_8c_a21f0e43fc8ee60f38c17e62f41ab2b6a}{not\+Available}} (unsigned int mode)
+\item 
+int \mbox{\hyperlink{MyScheduler_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{MyScheduler_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{MyScheduler_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{MyScheduler.c@{MyScheduler.c}!main@{main}}
+\index{main@{main}!MyScheduler.c@{MyScheduler.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+D\+E\+B\+UG M\+O\+DE (passato per argomento)\+: 0) \mbox{[}D\+E\+F\+A\+U\+LT\mbox{]} D\+I\+S\+A\+T\+T\+I\+V\+A\+TO (Modalita\textquotesingle{} essenziale -\/ release) != 0) A\+T\+T\+I\+V\+A\+TO (Modalita\textquotesingle{} debug)\mbox{\Hypertarget{MyScheduler_8c_a21f0e43fc8ee60f38c17e62f41ab2b6a}\label{MyScheduler_8c_a21f0e43fc8ee60f38c17e62f41ab2b6a}} 
+\index{MyScheduler.c@{MyScheduler.c}!notAvailable@{notAvailable}}
+\index{notAvailable@{notAvailable}!MyScheduler.c@{MyScheduler.c}}
+\doxysubsubsection{\texorpdfstring{notAvailable()}{notAvailable()}}
+{\footnotesize\ttfamily void not\+Available (\begin{DoxyParamCaption}\item[{unsigned int}]{mode }\end{DoxyParamCaption})}
+
+Funzione che stampa un errore quando si ha scelto una modalita\textquotesingle{} attualmente non disponibile.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & La modalita\textquotesingle{} che si ha cercato di scegliere. \\
+\hline
+\end{DoxyParams}

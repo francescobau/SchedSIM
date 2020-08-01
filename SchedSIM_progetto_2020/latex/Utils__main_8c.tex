@@ -1,0 +1,107 @@
+\hypertarget{Utils__main_8c}{}\doxysection{Utils\+\_\+main.\+c File Reference}
+\label{Utils__main_8c}\index{Utils\_main.c@{Utils\_main.c}}
+{\ttfamily \#include \char`\"{}Utils\+\_\+main.\+h\char`\"{}}\newline
+Include dependency graph for Utils\+\_\+main.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+short int \mbox{\hyperlink{Utils__main_8c_a272acd6d4246df4467ded908d558e88f}{select\+Mode}} (unsigned short int debug\+Mode)
+\item 
+int \mbox{\hyperlink{Utils__main_8c_a778f7f8fcf0d92284986be44427b7e3c}{count\+Processes}} (char $\ast$buffer, unsigned short int debug\+Mode)
+\item 
+int \mbox{\hyperlink{Utils__main_8c_aaf96f28f81349b063a7c8c09f5bebe89}{pre\+Process}} (char $\ast$buffer, unsigned short int debug\+Mode)
+\item 
+int \mbox{\hyperlink{Utils__main_8c_a15d1023c44bb3f53c0eefa3e3189000e}{import\+Processes}} (char $\ast$buffer, struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+void \mbox{\hyperlink{Utils__main_8c_ad9809f7be151e648aaba8585c49b5c1a}{free\+Array}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes, unsigned short int amount)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Utils__main_8c_a778f7f8fcf0d92284986be44427b7e3c}\label{Utils__main_8c_a778f7f8fcf0d92284986be44427b7e3c}} 
+\index{Utils\_main.c@{Utils\_main.c}!countProcesses@{countProcesses}}
+\index{countProcesses@{countProcesses}!Utils\_main.c@{Utils\_main.c}}
+\doxysubsubsection{\texorpdfstring{countProcesses()}{countProcesses()}}
+{\footnotesize\ttfamily int count\+Processes (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{unsigned short int}]{debug\+Mode }\end{DoxyParamCaption})}
+
+Funzione che scansiona rapidamente il file, contando quanti processi ci sono. Si considerano i processi separati da un carattere di newline (~\newline
+).
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Il buffer da scansionare. \\
+\hline
+{\em debug\+Mode} & 0 per Modalita\textquotesingle{} Release, altrimenti viene usata modalita\textquotesingle{} di Debug. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Il numero di processi. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils__main_8c_ad9809f7be151e648aaba8585c49b5c1a}\label{Utils__main_8c_ad9809f7be151e648aaba8585c49b5c1a}} 
+\index{Utils\_main.c@{Utils\_main.c}!freeArray@{freeArray}}
+\index{freeArray@{freeArray}!Utils\_main.c@{Utils\_main.c}}
+\doxysubsubsection{\texorpdfstring{freeArray()}{freeArray()}}
+{\footnotesize\ttfamily void free\+Array (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes,  }\item[{unsigned short int}]{amount }\end{DoxyParamCaption})}
+
+Funzione che libera lo spazio allocato dinamicamente per l\textquotesingle{}array dei nomi di processo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+{\em amount} & La quantita\textquotesingle{} di spazi allocati dinamicamente da liberare. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Utils__main_8c_a15d1023c44bb3f53c0eefa3e3189000e}\label{Utils__main_8c_a15d1023c44bb3f53c0eefa3e3189000e}} 
+\index{Utils\_main.c@{Utils\_main.c}!importProcesses@{importProcesses}}
+\index{importProcesses@{importProcesses}!Utils\_main.c@{Utils\_main.c}}
+\doxysubsubsection{\texorpdfstring{importProcesses()}{importProcesses()}}
+{\footnotesize\ttfamily int import\+Processes (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Metodo per importare tutti i processi.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Il buffer da scansionare. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Il numero di aree di memoria allocate dinamicamente per i processi. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils__main_8c_aaf96f28f81349b063a7c8c09f5bebe89}\label{Utils__main_8c_aaf96f28f81349b063a7c8c09f5bebe89}} 
+\index{Utils\_main.c@{Utils\_main.c}!preProcess@{preProcess}}
+\index{preProcess@{preProcess}!Utils\_main.c@{Utils\_main.c}}
+\doxysubsubsection{\texorpdfstring{preProcess()}{preProcess()}}
+{\footnotesize\ttfamily int pre\+Process (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{unsigned short int}]{debug\+Mode }\end{DoxyParamCaption})}
+
+Funzione che preprocessa il buffer, sostituendo i token separatori in spazi.
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Il buffer da scansionare. \\
+\hline
+{\em debug\+Mode} & 0 per Modalita\textquotesingle{} Release, altrimenti viene usata modalita\textquotesingle{} di Debug. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+OF in caso di errore, 0 altrimenti. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils__main_8c_a272acd6d4246df4467ded908d558e88f}\label{Utils__main_8c_a272acd6d4246df4467ded908d558e88f}} 
+\index{Utils\_main.c@{Utils\_main.c}!selectMode@{selectMode}}
+\index{selectMode@{selectMode}!Utils\_main.c@{Utils\_main.c}}
+\doxysubsubsection{\texorpdfstring{selectMode()}{selectMode()}}
+{\footnotesize\ttfamily short int select\+Mode (\begin{DoxyParamCaption}\item[{unsigned short int}]{debug\+Mode }\end{DoxyParamCaption})}
+
+Funzione che permette all\textquotesingle{}utente di scegliere la modalita\textquotesingle{}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em debug\+Mode} & 0 per Modalita\textquotesingle{} Release, altrimenti viene usata modalita\textquotesingle{} di Debug. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+La nuova modalita\textquotesingle{} da utilizzare nel programma, -\/1 in caso di valore invalido. 
+\end{DoxyReturn}

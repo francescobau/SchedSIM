@@ -1,8 +1,8 @@
 /*
  * SchedulerRR.h
  *
- *  Created on: 7 giu 2020
- *      Author: francesco
+ *      @author		Francesco Bau' 1136850
+ *      @since		7 giu 2020
  */
 
 #ifndef SCHEDULERRR_H_
@@ -13,7 +13,7 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-//TODO: Specifiche.
-void emulateRR(struct processesData processes, unsigned short int debugMode);
+// Esecuzione dell'algoritmo RR.
+void emulateRR(struct processesData processes);
 
 #endif /* SCHEDULERRR_H_ */

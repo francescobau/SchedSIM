@@ -1,8 +1,8 @@
 /*
  * SchedulerPS.h
  *
- *  Created on: 7 giu 2020
- *      Author: francesco
+ *      @author		Francesco Bau' 1136850
+ *      @since		7 giu 2020
  */
 
 #ifndef SCHEDULERPS_H_
@@ -13,7 +13,12 @@
 #include "Utils.h"
 #endif /* UTILS_H_ */
 
-// TODO: Specifiche.
-void emulatePS(struct processesData processes, unsigned short int debugMode);
-
+// Esecuzione dell'algoritmo PS.
+void emulatePS(struct processesData processes);
+// Ripristino dell'array delle priorita' ai valori di default.
+void restoreDefaultPriorities(struct processesData processes);
+// Funzione che verifica se il processo in esecuzione ha minore priorita' del primo processo in Ready List.
+int hasLowerPriority(unsigned int currentIndex, struct processesData processes);
+// Funzione che applica la tecnica di aging ai processi che hanno atteso in Ready List.
+void increasePriorities(struct processesData processes);
 #endif /* SCHEDULERPS_H_ */

@@ -1,0 +1,78 @@
+\hypertarget{SchedulerPS_8h}{}\doxysection{Scheduler\+P\+S.\+h File Reference}
+\label{SchedulerPS_8h}\index{SchedulerPS.h@{SchedulerPS.h}}
+{\ttfamily \#include \char`\"{}Utils.\+h\char`\"{}}\newline
+Include dependency graph for Scheduler\+P\+S.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{SchedulerPS_8h_aed367408d6a1c0c371bf419c0561ecbe}{emulate\+PS}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+void \mbox{\hyperlink{SchedulerPS_8h_ae1d0471241b4552ced1ac25ba31fc0af}{restore\+Default\+Priorities}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+int \mbox{\hyperlink{SchedulerPS_8h_afeb2a09024963143d271e88b4c36f49e}{has\+Lower\+Priority}} (unsigned int current\+Index, struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+void \mbox{\hyperlink{SchedulerPS_8h_af88f4dbfbcebc0dce98e12b19b1a6f51}{increase\+Priorities}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{SchedulerPS_8h_aed367408d6a1c0c371bf419c0561ecbe}\label{SchedulerPS_8h_aed367408d6a1c0c371bf419c0561ecbe}} 
+\index{SchedulerPS.h@{SchedulerPS.h}!emulatePS@{emulatePS}}
+\index{emulatePS@{emulatePS}!SchedulerPS.h@{SchedulerPS.h}}
+\doxysubsubsection{\texorpdfstring{emulatePS()}{emulatePS()}}
+{\footnotesize\ttfamily void emulate\+PS (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Esecuzione dell\textquotesingle{}algoritmo PS.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi.\\
+\hline
+\end{DoxyParams}
+T\+O\+DO\+: Ottimizzare codice. \mbox{\Hypertarget{SchedulerPS_8h_afeb2a09024963143d271e88b4c36f49e}\label{SchedulerPS_8h_afeb2a09024963143d271e88b4c36f49e}} 
+\index{SchedulerPS.h@{SchedulerPS.h}!hasLowerPriority@{hasLowerPriority}}
+\index{hasLowerPriority@{hasLowerPriority}!SchedulerPS.h@{SchedulerPS.h}}
+\doxysubsubsection{\texorpdfstring{hasLowerPriority()}{hasLowerPriority()}}
+{\footnotesize\ttfamily int has\+Lower\+Priority (\begin{DoxyParamCaption}\item[{unsigned int}]{current\+Index,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione che verifica se il processo in esecuzione ha minore priorita\textquotesingle{} del primo processo in Ready List.
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Index} & l\textquotesingle{}indice del processo in esecuzione. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 se il primo processo in Ready List ha priorita\textquotesingle{} maggiore di quello in esecuzione, 0 altrimenti. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{SchedulerPS_8h_af88f4dbfbcebc0dce98e12b19b1a6f51}\label{SchedulerPS_8h_af88f4dbfbcebc0dce98e12b19b1a6f51}} 
+\index{SchedulerPS.h@{SchedulerPS.h}!increasePriorities@{increasePriorities}}
+\index{increasePriorities@{increasePriorities}!SchedulerPS.h@{SchedulerPS.h}}
+\doxysubsubsection{\texorpdfstring{increasePriorities()}{increasePriorities()}}
+{\footnotesize\ttfamily void increase\+Priorities (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione che applica la tecnica di aging ai processi che hanno atteso in Ready List.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{SchedulerPS_8h_ae1d0471241b4552ced1ac25ba31fc0af}\label{SchedulerPS_8h_ae1d0471241b4552ced1ac25ba31fc0af}} 
+\index{SchedulerPS.h@{SchedulerPS.h}!restoreDefaultPriorities@{restoreDefaultPriorities}}
+\index{restoreDefaultPriorities@{restoreDefaultPriorities}!SchedulerPS.h@{SchedulerPS.h}}
+\doxysubsubsection{\texorpdfstring{restoreDefaultPriorities()}{restoreDefaultPriorities()}}
+{\footnotesize\ttfamily void restore\+Default\+Priorities (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione per ripristinare le priorita\textquotesingle{} ai valori di default.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}

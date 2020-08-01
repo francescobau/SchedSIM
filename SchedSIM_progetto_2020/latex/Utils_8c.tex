@@ -1,0 +1,194 @@
+\hypertarget{Utils_8c}{}\doxysection{Utils.\+c File Reference}
+\label{Utils_8c}\index{Utils.c@{Utils.c}}
+{\ttfamily \#include \char`\"{}Utils.\+h\char`\"{}}\newline
+Include dependency graph for Utils.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{Utils_8c_adc20d514fe8b4abff25cc37b298f7a69}{check\+Arrivals}} (unsigned int time, struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+void \mbox{\hyperlink{Utils_8c_a92413170b95ed21a2e2ad11520228d43}{restore\+Lists}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+int \mbox{\hyperlink{Utils_8c_afe1ff06cd4cfc7df5f3a625f572c84cf}{remove\+Process\+At}} (unsigned int index, struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes, enum \mbox{\hyperlink{Utils_8h_a3f7c2b3e7d0d3addfe7bcec82dfe7a05}{list\+Type}} lt)
+\item 
+int \mbox{\hyperlink{Utils_8c_a763d9626b9ae48a6d56bb5a244be5422}{add\+Process\+At}} (unsigned int process\+Index, unsigned int target\+Index, struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+int \mbox{\hyperlink{Utils_8c_a4a793af1488ca7df41ae86785d42b7d1}{enqueue}} (unsigned int process\+Index, struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+int \mbox{\hyperlink{Utils_8c_ad69d9c24ef804fc01a2cd83973797ff7}{dequeue}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes, enum \mbox{\hyperlink{Utils_8h_a3f7c2b3e7d0d3addfe7bcec82dfe7a05}{list\+Type}} lt)
+\item 
+int \mbox{\hyperlink{Utils_8c_a8f5f7a99d5abd871ebc4c97b9279ffb1}{put\+On\+Head}} (unsigned int index, struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+void \mbox{\hyperlink{Utils_8c_aed606d03725da3954fcad5cb98aaffc6}{non\+Valid\+Index\+Error}} (unsigned int index)
+\item 
+void \mbox{\hyperlink{Utils_8c_ab536149437b0c628d7d4bd0a1ddca1ff}{sort\+Per\+Arrival}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes)
+\item 
+int \mbox{\hyperlink{Utils_8c_a5e67bef004e6d21a2324385f1ea39ca9}{print\+Array}} (struct \mbox{\hyperlink{structprocessesData}{processes\+Data}} processes, enum \mbox{\hyperlink{Utils_8h_a3f7c2b3e7d0d3addfe7bcec82dfe7a05}{list\+Type}} lt)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{Utils_8c_a763d9626b9ae48a6d56bb5a244be5422}\label{Utils_8c_a763d9626b9ae48a6d56bb5a244be5422}} 
+\index{Utils.c@{Utils.c}!addProcessAt@{addProcessAt}}
+\index{addProcessAt@{addProcessAt}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{addProcessAt()}{addProcessAt()}}
+{\footnotesize\ttfamily int add\+Process\+At (\begin{DoxyParamCaption}\item[{unsigned int}]{process\+Index,  }\item[{unsigned int}]{target\+Index,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione che inserisce l\textquotesingle{}indice dato di un processo in RL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em process\+Index} & L\textquotesingle{}indice del processo considerato, da inserire in Ready List. \\
+\hline
+{\em target\+Index} & L\textquotesingle{}indice della Ready List in cui process\+Index sara\textquotesingle{} inserito. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+OF in caso di errore, 0 altrimenti. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils_8c_adc20d514fe8b4abff25cc37b298f7a69}\label{Utils_8c_adc20d514fe8b4abff25cc37b298f7a69}} 
+\index{Utils.c@{Utils.c}!checkArrivals@{checkArrivals}}
+\index{checkArrivals@{checkArrivals}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{checkArrivals()}{checkArrivals()}}
+{\footnotesize\ttfamily unsigned int check\+Arrivals (\begin{DoxyParamCaption}\item[{unsigned int}]{time,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione per controllare quali processi entrano in coda a RL ad un certo istante time. Si considera u\+RL gia\textquotesingle{} ordinato.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & L\textquotesingle{}istante di tempo preso in considerazione. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+il numero di processi che entrano in coda RL.
+\end{DoxyReturn}
+T\+O\+DO\+: Gestione avanzata per algoritmi piu\textquotesingle{} avanzati. \mbox{\Hypertarget{Utils_8c_ad69d9c24ef804fc01a2cd83973797ff7}\label{Utils_8c_ad69d9c24ef804fc01a2cd83973797ff7}} 
+\index{Utils.c@{Utils.c}!dequeue@{dequeue}}
+\index{dequeue@{dequeue}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{dequeue()}{dequeue()}}
+{\footnotesize\ttfamily int dequeue (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes,  }\item[{enum \mbox{\hyperlink{Utils_8h_a3f7c2b3e7d0d3addfe7bcec82dfe7a05}{list\+Type}}}]{lt }\end{DoxyParamCaption})}
+
+Funzione che rimuove il primo processo in RL o u\+RL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+{\em lt} & Specifica se si vuole considerare Ready List o un\+Ready List. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Utils_8c_a4a793af1488ca7df41ae86785d42b7d1}\label{Utils_8c_a4a793af1488ca7df41ae86785d42b7d1}} 
+\index{Utils.c@{Utils.c}!enqueue@{enqueue}}
+\index{enqueue@{enqueue}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{enqueue()}{enqueue()}}
+{\footnotesize\ttfamily int enqueue (\begin{DoxyParamCaption}\item[{unsigned int}]{process\+Index,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione che mette un processo in coda a RL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em process\+Index} & L\textquotesingle{}indice del processo considerato, da inserire in coda di Ready List. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+OF in caso di errore, 0 altrimenti. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils_8c_aed606d03725da3954fcad5cb98aaffc6}\label{Utils_8c_aed606d03725da3954fcad5cb98aaffc6}} 
+\index{Utils.c@{Utils.c}!nonValidIndexError@{nonValidIndexError}}
+\index{nonValidIndexError@{nonValidIndexError}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{nonValidIndexError()}{nonValidIndexError()}}
+{\footnotesize\ttfamily void non\+Valid\+Index\+Error (\begin{DoxyParamCaption}\item[{unsigned int}]{index }\end{DoxyParamCaption})}
+
+Funzione che stampa in stderr la non validita\textquotesingle{} dell\textquotesingle{}indice scelto. 
+\begin{DoxyParams}{Parameters}
+{\em index} & L\textquotesingle{}indice non valido. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Utils_8c_a5e67bef004e6d21a2324385f1ea39ca9}\label{Utils_8c_a5e67bef004e6d21a2324385f1ea39ca9}} 
+\index{Utils.c@{Utils.c}!printArray@{printArray}}
+\index{printArray@{printArray}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{printArray()}{printArray()}}
+{\footnotesize\ttfamily int print\+Array (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes,  }\item[{enum \mbox{\hyperlink{Utils_8h_a3f7c2b3e7d0d3addfe7bcec82dfe7a05}{list\+Type}}}]{lt }\end{DoxyParamCaption})}
+
+Funzione per stampare il contenuto di RL o di u\+RL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+{\em lt} & Specifica se si vuole considerare Ready List o un\+Ready List. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+OF in caso di errore, 0 se viene eseguito correttamente.
+\end{DoxyReturn}
+T\+O\+DO\+: Estendere print\+Array anche per altre liste. T\+O\+DO\+: Migliorare il return, se necessario. \mbox{\Hypertarget{Utils_8c_a8f5f7a99d5abd871ebc4c97b9279ffb1}\label{Utils_8c_a8f5f7a99d5abd871ebc4c97b9279ffb1}} 
+\index{Utils.c@{Utils.c}!putOnHead@{putOnHead}}
+\index{putOnHead@{putOnHead}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{putOnHead()}{putOnHead()}}
+{\footnotesize\ttfamily int put\+On\+Head (\begin{DoxyParamCaption}\item[{unsigned int}]{index,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione che sposta in testa un processo da u\+RL.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & L\textquotesingle{}indice di u\+RL considerato. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+OF in caso di indice errato, altrimenti viene restituito 0.
+\end{DoxyReturn}
+T\+O\+DO\+: Restituire il nuovo indice, anziche\textquotesingle{} 0. Da gestire i casi degeneri. \mbox{\Hypertarget{Utils_8c_afe1ff06cd4cfc7df5f3a625f572c84cf}\label{Utils_8c_afe1ff06cd4cfc7df5f3a625f572c84cf}} 
+\index{Utils.c@{Utils.c}!removeProcessAt@{removeProcessAt}}
+\index{removeProcessAt@{removeProcessAt}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{removeProcessAt()}{removeProcessAt()}}
+{\footnotesize\ttfamily int remove\+Process\+At (\begin{DoxyParamCaption}\item[{unsigned int}]{index,  }\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes,  }\item[{enum \mbox{\hyperlink{Utils_8h_a3f7c2b3e7d0d3addfe7bcec82dfe7a05}{list\+Type}}}]{lt }\end{DoxyParamCaption})}
+
+Funzione che rimuove un processo da RL o da u\+RL, dato un certo indice. 
+\begin{DoxyParams}{Parameters}
+{\em index} & L\textquotesingle{}indice di RL o u\+RL considerato. \\
+\hline
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+{\em lt} & Specifica se si vuole considerare Ready List o un\+Ready List. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+E\+OF in caso di errore, altrimenti restituisce l\textquotesingle{}indice del processo rimosso. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils_8c_a92413170b95ed21a2e2ad11520228d43}\label{Utils_8c_a92413170b95ed21a2e2ad11520228d43}} 
+\index{Utils.c@{Utils.c}!restoreLists@{restoreLists}}
+\index{restoreLists@{restoreLists}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{restoreLists()}{restoreLists()}}
+{\footnotesize\ttfamily void restore\+Lists (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione che ripristina RL e u\+RL allo stato iniziale.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Utils_8c_ab536149437b0c628d7d4bd0a1ddca1ff}\label{Utils_8c_ab536149437b0c628d7d4bd0a1ddca1ff}} 
+\index{Utils.c@{Utils.c}!sortPerArrival@{sortPerArrival}}
+\index{sortPerArrival@{sortPerArrival}!Utils.c@{Utils.c}}
+\doxysubsubsection{\texorpdfstring{sortPerArrival()}{sortPerArrival()}}
+{\footnotesize\ttfamily void sort\+Per\+Arrival (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structprocessesData}{processes\+Data}}}]{processes }\end{DoxyParamCaption})}
+
+Funzione che riordina la un\+Ready list. Viene usato un Bubble Sort ottimizzato.
+
+
+\begin{DoxyParams}{Parameters}
+{\em processes} & Le proprieta\textquotesingle{} dei vari processi.\\
+\hline
+\end{DoxyParams}
+T\+O\+DO\+: Implementare algoritmo migliore (si usera\textquotesingle{} Insertion Sort dall\textquotesingle{}inizio, quindi questa funzione non ci sara\textquotesingle{} piu\textquotesingle{}. 

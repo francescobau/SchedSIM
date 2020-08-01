@@ -1,11 +1,15 @@
 /*
  * SchedulerSPN.c
  *
- *  Created on: 7 giu 2020
- *      Author: francesco
+ *      @author		Francesco Bau' 1136850
+ *      @since		7 giu 2020
  */
 #include "SchedulerSPN.h"
-//TODO: Specifiche.
-void emulateSPN(struct processesData processes, unsigned short int debugMode){
+/*
+ * Esecuzione dell'algoritmo SPN.
+ *
+ * @param processes 	Le proprieta' dei vari processi.
+ */
+void emulateSPN(struct processesData processes) {
 
 }

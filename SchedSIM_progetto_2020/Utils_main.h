@@ -1,8 +1,8 @@
 /*
  * Utils_main.h
  *
- *  Created on: 7 giu 2020
- *      Author: francesco
+ *      @author		Francesco Bau' 1136850
+ *		@since		7 giu 2020
  */
 
 #ifndef UTILS_MAIN_H_
@@ -16,13 +16,17 @@
 #include "SchedulerSRT.h"
 
 // Nome del file
-#define FILE_NAME "my_processes.txt"
+//#define FILE_NAME "my_processes.txt"
 //#define FILE_NAME "my_processes1.txt"
 //#define FILE_NAME "my_processes2.txt"
 //#define FILE_NAME "my_processes3.txt"
 //#define FILE_NAME "my_wrong_processes.txt"
 //#define FILE_NAME "my_wrong_processes1.txt"
+//#define FILE_NAME "my_wrong_processes2.txt"
+//#define FILE_NAME "my_wrong_processes3.txt"
 //#define FILE_NAME "empty_file.txt"
+#define FILE_NAME "my_mixed_processes.txt"
+//#define FILE_NAME "my_invalid_processes.txt"
 
 // Modalita' disponibili nel menu.
 #define FCFS_MODE 1
@@ -38,17 +42,18 @@
 
 // Numero di possibili modalita'.
 #define MODE_LENGTH SRT_MODE
-// Numero massimo di token separatori.
-#define MAX_TOKENS 2
-//TODO: Specifiche
+// Numero massimo di token estratti da una riga di testo.
+// Il numero massimo di token separatori e' MAX_TOKENS-1 .
+#define MAX_TOKENS 3
+// Funzione che permette all'utente di scegliere la modalita'.
 short int selectMode(unsigned short int debugMode);
 // Funzione che scansiona rapidamente il file, contando quanti processi ci sono.
-int countProcesses(char* buffer, unsigned short int debugMode);
-//TODO: Specifiche
-int preProcess(char* buffer, unsigned int debugMode);
-//TODO: Specifiche
-int importProcesses(char* buffer, struct processesData processes, unsigned short int debugMode);
-//TODO: Specifiche
-void freeArray(struct processesData processes, unsigned short int amount, unsigned short int debugMode);
+int countProcesses(char *buffer, unsigned short int debugMode);
+// Funzione che preprocessa il buffer, sostituendo i token separatori in spazi.
+int preProcess(char *buffer, unsigned short int debugMode);
+// Funzione che memorizza il contenuto del buffer nei vari array.
+int importProcesses(char *buffer, struct processesData processes);
+// Funzione che libera lo spazio allocato dinamicamente per l'array dei nomi di processo.
+void freeArray(struct processesData processes, unsigned short int amount);
 
 #endif /* UTILS_MAIN_H_ */
